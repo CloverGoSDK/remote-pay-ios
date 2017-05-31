@@ -1,0 +1,32 @@
+PODS:
+  - Alamofire (3.5.1)
+  - CloverConnector (1.2.0.b):
+    - CloverGoSDK (= 2.1.7)
+    - ObjectMapper (= 1.5.0)
+    - Starscream (= 1.1.4)
+    - SwiftyJSON (= 2.4.0)
+  - CloverGoSDK (2.1.7):
+    - Alamofire (= 3.5.1)
+    - ObjectMapper (= 1.5.0)
+  - ObjectMapper (1.5.0)
+  - Starscream (1.1.4)
+  - SwiftyJSON (2.4.0)
+
+DEPENDENCIES:
+  - CloverConnector (from `../`)
+
+EXTERNAL SOURCES:
+  CloverConnector:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
+  CloverConnector: 5eccf32d16b16ba02f4ee460d268bb60206e0139
+  CloverGoSDK: c6e080ba5889e0a2de8bb0f8e23c245f16b3844f
+  ObjectMapper: 386645adca9d9d23b95eda43090b09d66444cf14
+  Starscream: f919aeaf81afca6d5d4d3e5f6dd136ec92af2aa1
+  SwiftyJSON: 96918c1bf505efa50c4f72957018dd3452090c9c
+
+PODFILE CHECKSUM: 0ddcd364418002f57a60cadc3cedfd6656a5a704
+
+COCOAPODS: 1.2.1

@@ -11,17 +11,17 @@ import Intents
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PairingDeviceConfiguration {
-
+    
     var window: UIWindow?
     
-    public var cloverConnector:ICloverConnector?
-    public var cloverConnectorListener:CloverConnectorListener?
-    public var testCloverConnectorListener:TestCloverConnectorListener?
-    public var store:POSStore?
+    internal var cloverConnector:ICloverConnector?
+    internal var cloverConnectorListener:CloverConnectorListener?
+    internal var testCloverConnectorListener:TestCloverConnectorListener?
+    internal var store:POSStore?
     private var token:String?
-
+    
     private let PAIRING_AUTH_TOKEN_KEY:String = "PAIRING_AUTH_TOKEN"
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         store = POSStore()
         store?.availableItems = NSMutableArray()
@@ -57,12 +57,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PairingDeviceConfiguratio
         NSUserDefaults.standardUserDefaults().synchronize()
     }
     
-    func clearConnect(_ url:String) {
+    func clearConnect(url:String) {
         self.token = nil
         connect(url)
     }
     
-    func connect(_ url:String) {
+    func connect(url:String) {
         cloverConnector?.dispose()
         
         let config:WebSocketDeviceConfiguration = WebSocketDeviceConfiguration(endpoint:url, remoteApplicationID: "com.clover.ios.example.app", posName: "iOS Example POS", posSerial: "POS-15", pairingAuthToken: self.token, pairingDeviceConfiguration: self)
@@ -77,38 +77,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PairingDeviceConfiguratio
         cloverConnector!.addCloverConnectorListener(cloverConnectorListener!)
         cloverConnector!.initializeConnection()
     }
-
-    func applicationWillResignActive(_ application: UIApplication) {
+    
+    func connectToCloverGoReader() {
+        let config : CloverGoDeviceConfiguration = CloverGoDeviceConfiguration.Builder(apiKey: "Lht4CAQq8XxgRikjxwE71JE20by5dzlY", secret: "7ebgf6ff8e98d1565ab988f5d770a911e36f0f2347e3ea4eb719478c55e74d9g", env: .test).accessToken("0a7637b3-66eb-623c-7d9b-2acfb90d8237").deviceType(.RP450).allowDuplicateTransaction(true).allowAutoConnect(true).build()
+        
+        cloverConnector = CloverGoConnector(config: config)
+        
+        cloverConnectorListener = CloverGoConnectorListener(cloverConnector: cloverConnector!)
+        cloverConnectorListener?.viewController = self.window?.rootViewController
+        (cloverConnector as? CloverGoConnector)?.addCloverGoConnectorListener((cloverConnectorListener as? ICloverGoConnectorListener)!)
+        
+        cloverConnector!.initializeConnection()
+        
+    }
+    
+    func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
+    
+    func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
+    
+    func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-
+    
+    func applicationDidBecomeActive(application: UIApplication) {
+        
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
-
-    func applicationWillTerminate(_ application: UIApplication) {
+    
+    func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
     // this gets called for a notification while the app is the active app
-    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-
-    }
-    
-    func applicationDidFinishLaunching(_ application: UIApplication) {
+    func application(application: UIApplication, didReceive notification: UILocalNotification) {
         
     }
-
+    
+    func applicationDidFinishLaunching(application: UIApplication) {
+        
+    }
+    
 }
 

@@ -1,10 +1,10 @@
 
 Pod::Spec.new do |s|
-  s.name             = 'CloverConnector'
-  s.version          = '1.2.0.b'
-  s.summary          = 'Provides an api for communicating with a Clover Mini as a customer facing payment device.'
+s.name             = 'CloverConnector'
+s.version          = '1.2.0.b'
+s.summary          = 'Provides an api for communicating with a Clover Mini as a customer facing payment device.'
 
-  s.description      = <<-DESC
+s.description      = <<-DESC
 CloverConnector provides an interface to communicate with a tethered Clover device to enable integration with Clover's customer facing payment device capabilities
 ICloverConnector
 - *sale* - method to collect a final sale payment
@@ -52,21 +52,23 @@ ICloverConnectorListener
 - *onReadCardDataResponse* - called at the completion of a read card data request. Data may come back encrypted depending on the card type and bin
 DESC
 
-  s.homepage         = 'https://docs.clover.com/build/integration-overview-requirements/'
-  s.license          = { :type => 'Custom', :file => 'LICENSE' }
-  s.author           = { 'Clover' => 'semi-integrations@clover.com' }
-  s.source           = { :git => 'https://github.com/clover/remote-pay-ios.git', :tag => s.version.to_s }
+s.homepage         = 'https://docs.clover.com/build/integration-overview-requirements/'
+s.license          = { :type => 'Custom', :file => 'LICENSE' }
+s.author           = { 'Clover' => 'semi-integrations@clover.com' }
+s.source           = { :git => 'https://github.com/clover/remote-pay-ios.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '8.0'
-  s.osx.deployment_target = '10.10'
-  s.watchos.deployment_target = '2.0'
+s.ios.deployment_target = '8.0'
+s.osx.deployment_target = '10.10'
+s.watchos.deployment_target = '2.0'
 
-  s.source_files = 'CloverConnector/Classes/**/*.swift'
-  
+s.source_files = 'CloverConnector/Classes/**/*.swift'
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  s.frameworks = 'Foundation'
-  s.dependency 'ObjectMapper', '1.5.0'
-  s.dependency 'Starscream', '1.1.4'
-  s.dependency 'SwiftyJSON', '2.4.0'
+s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(PODS_ROOT)/CloverGoSDK'}
+
+# s.public_header_files = 'Pod/Classes/**/*.h'
+s.frameworks = 'Foundation'
+s.dependency 'ObjectMapper', '1.5.0'
+s.dependency 'Starscream', '1.1.4'
+s.dependency 'SwiftyJSON', '2.4.0'
+s.dependency 'CloverGoSDK', '2.1.7'
 end
