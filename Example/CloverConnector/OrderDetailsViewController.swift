@@ -26,7 +26,7 @@ class OrderItemsTableDelegate : UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let store = self.store {
             return store.orders.count
         }
@@ -35,7 +35,7 @@ class OrderItemsTableDelegate : UITableViewController {
     
     
     
-    override func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("OrderItemTableCell") as! OrdersTableViewCell
         if let store = self.store {
             
@@ -48,7 +48,7 @@ class OrderItemsTableDelegate : UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
     
@@ -61,14 +61,14 @@ class OrderPaymentsTableDelegate : UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let store = self.store {
             return store.orders.count
         }
         return 0
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier( "OrderPaymentTableCell") as! OrdersTableViewCell
         if let store = self.store {
             
@@ -81,7 +81,7 @@ class OrderPaymentsTableDelegate : UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
 }

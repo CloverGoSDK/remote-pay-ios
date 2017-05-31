@@ -57,12 +57,12 @@ public class VaultCardViewController:UIViewController, UITableViewDataSource
         return cell!
     }
     
-    @IBAction func onVaultCard(_ sender: UIButton) {
+    @IBAction func onVaultCard(sender: UIButton) {
         tableView.becomeFirstResponder()
         (UIApplication.sharedApplication().delegate as! AppDelegate).cloverConnector?.vaultCard(VaultCardRequest())
     }
     
-    private func getKeyboardHeight(_ notification: NSNotification) -> CGFloat {
+    private func getKeyboardHeight(notification: NSNotification) -> CGFloat {
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame:NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.CGRectValue()
@@ -74,17 +74,17 @@ public class VaultCardViewController:UIViewController, UITableViewDataSource
 
 extension VaultCardViewController : POSStoreListener {
     // POSStoreListener
-    public func newOrderCreated(_ order:POSOrder){}
-    public func preAuthAdded(_ payment:POSPayment){
+    public func newOrderCreated(order:POSOrder){}
+    public func preAuthAdded(payment:POSPayment){
     }
-    public func preAuthRemoved(_ payment:POSPayment){}
-    public func vaultCardAdded(_ card:POSCard){
+    public func preAuthRemoved(payment:POSPayment){}
+    public func vaultCardAdded(card:POSCard){
         dispatch_async(dispatch_get_main_queue()) {
             dispatch_after(2, dispatch_get_main_queue(), {
                 self.tableView.reloadData()
             })
         }
     }
-    public func manualRefundAdded(_ credit:POSNakedRefund){}
+    public func manualRefundAdded(credit:POSNakedRefund){}
     // End POSStoreListener
 }

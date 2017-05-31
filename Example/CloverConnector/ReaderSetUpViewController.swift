@@ -59,7 +59,39 @@ class ReaderSetUpViewController: UIViewController {
     
     @IBAction func action_connect350Button(sender: AnyObject)
     {
-        
+        if(!is350ReaderInitialized)
+        {
+            if(((accessToken) != nil) && ((apiKey) != nil) && ((secret) != nil))
+            {
+                if(isOAuthMode)
+                {
+                    let config350Reader = CloverGoDeviceConfiguration.Builder(apiKey: apiKey!, secret: secret!, env: .test).accessToken(accessToken!).allowAutoConnect(true).allowDuplicateTransaction(true).build()
+                    cloverGoConnector350Reader = CloverGoConnector(config: config350Reader)
+                }
+                else
+                {
+                    let config350Reader : CloverGoDeviceConfiguration = CloverGoDeviceConfiguration.Builder(apiKey: apiKey!, secret: secret!, env: .test).accessToken(accessToken!).allowAutoConnect(true).allowDuplicateTransaction(true).build()
+                    cloverGoConnector350Reader = CloverGoConnector(config: config350Reader)
+                }
+                
+                cloverConnectorListener = CloverGoConnectorListener(cloverConnector: cloverGoConnector350Reader!)
+                (cloverGoConnector350Reader as? CloverGoConnector)?.addCloverGoConnectorListener((cloverConnectorListener as? ICloverGoConnectorListener)!)
+                
+                cloverGoConnector350Reader?.initializeConnection()
+            }
+            else
+            {
+                let alert = UIAlertController(title: nil, message: "Missing parameters to initialize the SDK", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
+        else
+        {
+            let alert = UIAlertController(title: nil, message: "Reader 350 is already initialized", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
 
     @IBAction func action_connect450Button(sender: AnyObject)

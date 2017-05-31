@@ -17,7 +17,7 @@ public class VaultCardMessage : Message {
         super.init(method: .VAULT_CARD)
     }
     
-    public required init?(_ map:Map) {
+    public required init?(map:Map) {
         super.init(method: .VAULT_CARD)
     }
     

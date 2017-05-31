@@ -14,7 +14,7 @@ public class POSDiscount : AnyObject {
     public var amount:Int?
     public var percentOff:Int? // 10000 is 10 percent off, 125 is 1/8% off
     
-    public func calculateAmountOff(_ baseAmount:Int) -> Int {
+    public func calculateAmountOff(baseAmount:Int) -> Int {
     var amountOff = 0
         if let amount = amount {
             amountOff = max(baseAmount, amount)

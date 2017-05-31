@@ -14,7 +14,7 @@ public class BreakMessage : Message {
     public required init() {
         super.init(method: .BREAK)
     }
-    public required init(_ map:Map) {
+    public required init(map:Map) {
         super.init(method: .BREAK)
     }
     

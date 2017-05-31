@@ -18,7 +18,7 @@ public class ShowPaymentReceiptOptionsMessage : Message {
         super.init(method: .SHOW_PAYMENT_RECEIPT_OPTIONS)
     }
     
-    public required init?(_ map:Map) {
+    public required init?(map:Map) {
         super.init(method: .SHOW_PAYMENT_RECEIPT_OPTIONS)
     }
     

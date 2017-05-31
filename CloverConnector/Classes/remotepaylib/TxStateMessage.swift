@@ -13,7 +13,7 @@ public class TxStateMessage : Message {
     
     public var txState:TxState?
     
-    public required init?(_ map:Map) {
+    public required init?(map:Map) {
         super.init(method: .TX_STATE)
     }
     

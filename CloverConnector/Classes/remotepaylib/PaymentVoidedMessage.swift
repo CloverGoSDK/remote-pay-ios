@@ -14,7 +14,7 @@ public class PaymentVoidedMessage : Message {
     public var payment:CLVModels.Payments.Payment?
     public var voidReason:VoidReason?
     
-    public required init?(_ map:Map) {
+    public required init?(map:Map) {
         super.init(method: .PAYMENT_VOIDED)
     }
     

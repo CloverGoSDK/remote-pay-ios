@@ -29,7 +29,7 @@ public class TipAdjustAuthRequest : NSObject, Mappable {
         self.paymentId = paymentId
     }
     
-    public required init?(_ map: Map) {
+    public required init?(map: Map) {
         orderId = ""
         paymentId = ""
         tipAmount = 0

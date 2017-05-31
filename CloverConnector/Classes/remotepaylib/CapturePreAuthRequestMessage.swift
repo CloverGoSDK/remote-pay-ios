@@ -19,7 +19,7 @@ public class CapturePreAuthRequestMessage:Message {
         super.init(method: .CAPTURE_PREAUTH)
     }
     
-    public required init?(_ map:Map) {
+    public required init?(map:Map) {
         super.init(method: .CAPTURE_PREAUTH)
     }
     

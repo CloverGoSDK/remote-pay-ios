@@ -26,11 +26,11 @@ public class POSLineItem : AnyObject {
         quantity -= 1
     }
     
-    public func addDiscount(_ discount:POSDiscount) {
+    public func addDiscount(discount:POSDiscount) {
         self.discount = discount
     }
     
-    public func removeDiscount(_ discount:POSDiscount) {
+    public func removeDiscount(discount:POSDiscount) {
         self.discount = nil
     }
     

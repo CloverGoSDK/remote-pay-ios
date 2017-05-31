@@ -9,7 +9,7 @@
 import Foundation
 
 class CloverDeviceFactory {
-    class func get(_ config:CloverDeviceConfiguration) -> CloverDevice?{
+    class func get(config:CloverDeviceConfiguration) -> CloverDevice?{
         return DefaultCloverDevice(config: config);
     }
 }

@@ -14,7 +14,7 @@ public class CardDataResponseMessage: Message {
     public var status:ResultStatus?
     public var reason:String?
     
-    public required init?(_ map:Map) {
+    public required init?(map:Map) {
         super.init(method: .CARD_DATA_RESPONSE)
     }
     

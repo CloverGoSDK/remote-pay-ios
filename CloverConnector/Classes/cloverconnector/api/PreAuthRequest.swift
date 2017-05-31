@@ -21,7 +21,7 @@ public class PreAuthRequest:TransactionRequest {
         super.init(amount:amount, externalId:externalId);
   }
     
-    public required init?(_ map: Map) {
+    public required init?(map: Map) {
         super.init(map)
     }
 

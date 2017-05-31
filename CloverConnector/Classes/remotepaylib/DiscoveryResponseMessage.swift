@@ -34,7 +34,7 @@ public class DiscoveryResponseMessage:Message {
     super.init(method: .DISCOVERY_RESPONSE)
   }
 
-  required public init?(_ map: Map) {
+  required public init?(map: Map) {
     super.init(method: .DISCOVERY_RESPONSE)
   }
 

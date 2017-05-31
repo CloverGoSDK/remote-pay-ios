@@ -15,8 +15,8 @@ import Foundation
 
 public protocol ICloverConnector : AnyObject {
     
-    func addCloverConnectorListener(_ cloverConnectorListener:ICloverConnectorListener) -> Void
-    func removeCloverConnectorListener(_ cloverConnectorListener:ICloverConnectorListener) -> Void
+    func addCloverConnectorListener(cloverConnectorListener:ICloverConnectorListener) -> Void
+    func removeCloverConnectorListener(cloverConnectorListener:ICloverConnectorListener) -> Void
     
     func initializeConnection() -> Void
     /*
@@ -122,13 +122,13 @@ public protocol ICloverConnector : AnyObject {
     // remove so there isn't a dependency on UIKit and it will work on MacOS
     //func  printImage ( _ image:UIImage ) -> Void
     
-    func printImageFromURL(_ url:String) -> Void
+    func printImageFromURL(url:String) -> Void
     
     
     /*
      * Request that the cash drawer connected to the device be opened.
      */
-    func  openCashDrawer (_ reason: String) -> Void
+    func  openCashDrawer (reason: String) -> Void
     
     
     /*

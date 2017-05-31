@@ -99,7 +99,7 @@ public protocol ICloverConnectorListener : AnyObject {
     /*
      * called when the device is ready to communicate
      */
-    func  onDeviceReady (_ merchantInfo: MerchantInfo) -> Void
+    func  onDeviceReady (merchantInfo: MerchantInfo) -> Void
     
     
     /*
@@ -113,13 +113,13 @@ public protocol ICloverConnectorListener : AnyObject {
      * @param request
      */
     
-    func onConfirmPaymentRequest(_ request:ConfirmPaymentRequest) -> Void
+    func onConfirmPaymentRequest(request:ConfirmPaymentRequest) -> Void
     
     /**
      * Called when a customer selects a tip amount on the Clover device screen
      * @param message
      */
-    func onTipAdded(_ message:TipAddedMessage) -> Void;
+    func onTipAdded(message:TipAddedMessage) -> Void;
     
     
     /**
@@ -127,47 +127,47 @@ public protocol ICloverConnectorListener : AnyObject {
      * Called when a user requests to print a receipt for a ManualRefund
      * @param printManualRefundReceiptMessage
      */
-    func onPrintManualRefundReceipt(_ printManualRefundReceiptMessage:PrintManualRefundReceiptMessage) -> Void
+    func onPrintManualRefundReceipt(printManualRefundReceiptMessage:PrintManualRefundReceiptMessage) -> Void
     /**
      * Will only be called if disablePrinting = true on the Sale, Auth, PreAuth or ManualRefund Request
      * Called when a user requests to print a receipt for a declined ManualRefund
      * @param printManualRefundDeclineReceiptMessage
      */
-    func onPrintManualRefundDeclineReceipt(_ printManualRefundDeclineReceiptMessage:PrintManualRefundDeclineReceiptMessage) -> Void
+    func onPrintManualRefundDeclineReceipt(printManualRefundDeclineReceiptMessage:PrintManualRefundDeclineReceiptMessage) -> Void
     
     /**
      * Will only be called if disablePrinting = true on the Sale, Auth, PreAuth or ManualRefund Request
      * Called when a user requests to print a receipt for a payment
      * @param printPaymentReceiptMessage
      */
-    func onPrintPaymentReceipt(_ printPaymentReceiptMessage:PrintPaymentReceiptMessage)
+    func onPrintPaymentReceipt(printPaymentReceiptMessage:PrintPaymentReceiptMessage)
     
     /**
      * Will only be called if disablePrinting = true on the Sale, Auth, PreAuth or ManualRefund Request
      * Called when a user requests to print a receipt for a declined payment
      * @param printPaymentDeclineReceiptMessage
      */
-    func onPrintPaymentDeclineReceipt(_ printPaymentDeclineReceiptMessage:PrintPaymentDeclineReceiptMessage)
+    func onPrintPaymentDeclineReceipt(printPaymentDeclineReceiptMessage:PrintPaymentDeclineReceiptMessage)
     
     /**
      * Will only be called if disablePrinting = true on the Sale, Auth, PreAuth or ManualRefund Request
      * Called when a user requests to print a merchant copy of a payment receipt
      * @param printPaymentMerchantCopyReceiptMessage
      */
-    func onPrintPaymentMerchantCopyReceipt(_ printPaymentMerchantCopyReceiptMessage:PrintPaymentMerchantCopyReceiptMessage) -> Void
+    func onPrintPaymentMerchantCopyReceipt(printPaymentMerchantCopyReceiptMessage:PrintPaymentMerchantCopyReceiptMessage) -> Void
     
     /**
      * Will only be called if disablePrinting = true on the Sale, Auth, PreAuth or ManualRefund Request
      * Called when a user requests to print a receipt for a payment refund
      * @param printRefundPaymentReceiptMessage
      */
-    func onPrintRefundPaymentReceipt(_ printRefundPaymentReceiptMessage:PrintRefundPaymentReceiptMessage) -> Void
+    func onPrintRefundPaymentReceipt(printRefundPaymentReceiptMessage:PrintRefundPaymentReceiptMessage) -> Void
     
     /**
      * Called in response to a retrievePendingPayment(...) request.
      * @param retrievePendingPaymentResponse
      */
-    func onRetrievePendingPaymentsResponse(_ retrievePendingPaymentResponse:RetrievePendingPaymentsResponse) -> Void
+    func onRetrievePendingPaymentsResponse(retrievePendingPaymentResponse:RetrievePendingPaymentsResponse) -> Void
     
-    func onReadCardDataResponse(_ readCardDataResponse:ReadCardDataResponse) -> Void
+    func onReadCardDataResponse(readCardDataResponse:ReadCardDataResponse) -> Void
 }

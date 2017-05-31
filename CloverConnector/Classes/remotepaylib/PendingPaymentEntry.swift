@@ -26,7 +26,7 @@ public class PendingPaymentEntry : NSObject, NSCoding, Mappable {
     
     override public init() {}
     
-    required public init?(_ map:Map) {}
+    required public init?(map:Map) {}
     
     public func mapping(map:Map) {
         paymentId <- map["paymentId"]

@@ -22,7 +22,7 @@ public class ReadCardDataRequest:NSObject, Mappable
         super.init()
     }
     
-    required public init?(_ map: Map) {
+    required public init?(map: Map) {
         super.init()
     }
     

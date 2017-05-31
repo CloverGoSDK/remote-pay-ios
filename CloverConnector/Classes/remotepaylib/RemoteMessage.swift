@@ -38,7 +38,7 @@ public class RemoteMessage:Mappable {
 
   }
 
-  required public init?(_ map: Map) {
+  required public init?(map: Map) {
     payload = map["payload"].currentValue as? String
     method = map["method"].currentValue as? Method
   }

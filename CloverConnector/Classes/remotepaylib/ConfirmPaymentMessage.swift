@@ -15,7 +15,7 @@ public class ConfirmPaymentMessage : Message {
     public var challenges:[Challenge]?
     
     
-    public required init?(_ map: Map) {
+    public required init?(map: Map) {
         super.init(method: Method.CONFIRM_PAYMENT_MESSAGE)
     }
     

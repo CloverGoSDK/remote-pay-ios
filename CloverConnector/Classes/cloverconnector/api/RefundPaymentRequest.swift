@@ -31,7 +31,7 @@ public class RefundPaymentRequest: NSObject, Mappable {
         self.fullRefund = fullRefund ?? true
     }
     
-    public required init?(_ map: Map) {
+    public required init?(map: Map) {
         orderId = ""
         paymentId = ""
         super.init()

@@ -15,7 +15,7 @@ public class CLVDateTransform: TransformType {
   
   public init() {}
     
-    public func transformFromJSON(_ value: AnyObject?) -> NSDate? {
+    public func transformFromJSON(value: AnyObject?) -> NSDate? {
         guard let timeInt = value as? Double else { return nil }
         return NSDate(timeIntervalSince1970: NSTimeInterval(timeInt / 1000))
     }
@@ -25,7 +25,7 @@ public class CLVDateTransform: TransformType {
     return Date(timeIntervalSince1970: TimeInterval(timeInt / 1000))
   }*/
   
-  public func transformToJSON(_ value: NSDate?) -> Double? {
+  public func transformToJSON(value: NSDate?) -> Double? {
     guard let date = value else { return nil }
     return date.timeIntervalSince1970 * 1000
   }
@@ -38,7 +38,7 @@ public class CLVDateTransform: TransformType {
   
   public init() {}
   
-    public func transformFromJSON(_ value: Any?) -> Array<T>? {
+    public func transformFromJSON(value: Any?) -> Array<T>? {
         //if let obj = value as? NSDictionary, let arr = obj.value(forKey: "elements") as? NSArray {
         //    return arr.map({ item in Mapper<T>().map(JSONObject: item as? Array<T> ?? item)! })
         //}
@@ -51,7 +51,7 @@ public class CLVDateTransform: TransformType {
         //return arr.map({ item in Mapper<T>().map(item as! [T])! })
     }
     
-    public func transformToJSON(_ value: [T]?) -> AnyObject? {
+    public func transformToJSON(value: [T]?) -> AnyObject? {
         guard let val = value else { return nil }
         let arrayList = NSMutableArray()//[String].init()
         for item in val {

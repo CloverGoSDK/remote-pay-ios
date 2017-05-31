@@ -42,13 +42,13 @@ public class CloverConnector : NSObject, ICloverConnector {
     }
     
     @objc
-    public func addCloverConnectorListener(_ listener : ICloverConnectorListener) {
+    public func addCloverConnectorListener(listener : ICloverConnectorListener) {
         
         broadcaster.addObject(listener);
     }
     
     @objc
-    public func removeCloverConnectorListener(_ listener: ICloverConnectorListener) {
+    public func removeCloverConnectorListener(listener: ICloverConnectorListener) {
         broadcaster.removeObject(listener)
     }
     
@@ -57,7 +57,7 @@ public class CloverConnector : NSObject, ICloverConnector {
         
         class ConnectionListener:DefaultCloverConnectorListener {
             private var resetAlready:Bool = false
-            override func onDeviceReady(_ merchantInfo: MerchantInfo) {
+            override func onDeviceReady(merchantInfo: MerchantInfo) {
                 if(!resetAlready) {
                     self.cloverConnector?.resetDevice()
                 }
@@ -76,7 +76,7 @@ public class CloverConnector : NSObject, ICloverConnector {
         }
     }
     
-    public func sale(_ saleRequest: SaleRequest) {
+    public func sale(saleRequest: SaleRequest) {
         if let device = device {
             if !isReady {
                 notifyListenersDeviceError(CloverDeviceErrorEvent(errorType: CloverDeviceErrorType.COMMUNICATION_ERROR, code: 0, message: "sale: The Clover Device is not ready"));
@@ -112,7 +112,7 @@ public class CloverConnector : NSObject, ICloverConnector {
         }
     }
     
-    public func auth(_ authRequest: AuthRequest) {
+    public func auth(authRequest: AuthRequest) {
         if let device = device {
             
             if !isReady {
@@ -151,7 +151,7 @@ public class CloverConnector : NSObject, ICloverConnector {
         }
     }
     
-    public func tipAdjustAuth(_ tipAdjustAuthRequest: TipAdjustAuthRequest) {
+    public func tipAdjustAuth(tipAdjustAuthRequest: TipAdjustAuthRequest) {
         if let device = device {
             
             if !isReady {
@@ -174,7 +174,7 @@ public class CloverConnector : NSObject, ICloverConnector {
         
     }
     
-    public func preAuth(_ preAuthRequest: PreAuthRequest) {
+    public func preAuth(preAuthRequest: PreAuthRequest) {
         if let device = device {
             
             if !isReady {
@@ -208,7 +208,7 @@ public class CloverConnector : NSObject, ICloverConnector {
         
     }
     
-    public func capturePreAuth(_ capturePreAuthRequest: CapturePreAuthRequest) {
+    public func capturePreAuth(capturePreAuthRequest: CapturePreAuthRequest) {
 
         if let device = self.device {
             let tipAmount = capturePreAuthRequest.tipAmount ?? 0
@@ -237,7 +237,7 @@ public class CloverConnector : NSObject, ICloverConnector {
      *
      * @param request
      */
-    private func saleAuth(_ request:TransactionRequest, suppressTipScreen:Bool) {
+    private func saleAuth(request:TransactionRequest, suppressTipScreen:Bool) {
         if let device = self.device {
             var tos = suppressTipScreen
 
@@ -324,7 +324,7 @@ public class CloverConnector : NSObject, ICloverConnector {
         }
     }
 
-    public func acceptSignature(_ signatureVerifyRequest: VerifySignatureRequest) {
+    public func acceptSignature(signatureVerifyRequest: VerifySignatureRequest) {
         if let device = device {
             if !isReady {
                 notifyListenersDeviceError(CloverDeviceErrorEvent(errorType: CloverDeviceErrorType.COMMUNICATION_ERROR, code: 0, message: "acceptSignature: The Clover Device is not ready"));
@@ -342,7 +342,7 @@ public class CloverConnector : NSObject, ICloverConnector {
         
     }
     
-    public func rejectSignature(_ signatureVerifyRequest: VerifySignatureRequest) {
+    public func rejectSignature(signatureVerifyRequest: VerifySignatureRequest) {
         if let device = device {
             if !isReady {
                 notifyListenersDeviceError(CloverDeviceErrorEvent(errorType: CloverDeviceErrorType.COMMUNICATION_ERROR, code: 0, message: "rejectSignature: The Clover Device is not ready"));
@@ -359,7 +359,7 @@ public class CloverConnector : NSObject, ICloverConnector {
         }
     }
     
-    public func refundPayment(_ refundPaymentRequest: RefundPaymentRequest) {
+    public func refundPayment(refundPaymentRequest: RefundPaymentRequest) {
         if let device = device {
             if !isReady {
                 notifyListenersDeviceError(CloverDeviceErrorEvent(errorType: CloverDeviceErrorType.COMMUNICATION_ERROR, code: 0, message: "refundPayment: The Clover Device is not ready"));
@@ -390,7 +390,7 @@ public class CloverConnector : NSObject, ICloverConnector {
         
     }
     
-    public func manualRefund(_ manualRefundRequest: ManualRefundRequest) {
+    public func manualRefund(manualRefundRequest: ManualRefundRequest) {
         deviceObserver!.lastRequest = manualRefundRequest
         if let device = device {
             if !isReady {
@@ -439,7 +439,7 @@ public class CloverConnector : NSObject, ICloverConnector {
 
     }
     
-    public func voidPayment(_ request: VoidPaymentRequest) {
+    public func voidPayment(request: VoidPaymentRequest) {
         
         if let device = device {
             if !isReady {
@@ -462,7 +462,7 @@ public class CloverConnector : NSObject, ICloverConnector {
 
     }
     
-    public func vaultCard(_ vaultCardRequest: VaultCardRequest) {
+    public func vaultCard(vaultCardRequest: VaultCardRequest) {
         if let device = device {
             if !isReady {
                 notifyListenersDeviceError(CloverDeviceErrorEvent(errorType: CloverDeviceErrorType.COMMUNICATION_ERROR, code: 0, message: "vaultCard: The Clover Device is not ready"));
@@ -479,7 +479,7 @@ public class CloverConnector : NSObject, ICloverConnector {
 
     }
     
-    public func closeout(_ closeoutRequest: CloseoutRequest) {
+    public func closeout(closeoutRequest: CloseoutRequest) {
         if let device = device {
             if !isReady {
                 notifyListenersDeviceError(CloverDeviceErrorEvent(errorType: CloverDeviceErrorType.COMMUNICATION_ERROR, code: 0, message: "closeout: The Clover Device is not ready"));
@@ -492,7 +492,7 @@ public class CloverConnector : NSObject, ICloverConnector {
         
     }
     
-    public func displayPaymentReceiptOptions(_ orderId:String, paymentId:String) {
+    public func displayPaymentReceiptOptions(orderId:String, paymentId:String) {
         if let device = device {
             if !isReady {
                 notifyListenersDeviceError(CloverDeviceErrorEvent(errorType: CloverDeviceErrorType.COMMUNICATION_ERROR, code: 0, message: "displayPaymentReceiptOptions: The Clover Device is not ready"));
@@ -506,7 +506,7 @@ public class CloverConnector : NSObject, ICloverConnector {
     }
     
     @objc
-    public func showMessage(_ message: String) {
+    public func showMessage(message: String) {
         if let device = device {
             if !isReady {
                 notifyListenersDeviceError(CloverDeviceErrorEvent(errorType: CloverDeviceErrorType.COMMUNICATION_ERROR, code: 0, message: "showMessage: The Clover Device is not ready"));
@@ -521,7 +521,7 @@ public class CloverConnector : NSObject, ICloverConnector {
     }
     
     @objc
-    public func printText(_ lines: [String]) {
+    public func printText(lines: [String]) {
         if let device = device {
             if !isReady {
                 notifyListenersDeviceError(CloverDeviceErrorEvent(errorType: CloverDeviceErrorType.COMMUNICATION_ERROR, code: 0, message: "printText: The Clover Device is not ready"));
@@ -535,7 +535,7 @@ public class CloverConnector : NSObject, ICloverConnector {
     }
 
     @objc
-    public func printImageFromURL(_ url:String) {
+    public func printImageFromURL(url:String) {
         if let device = device {
             if !isReady {
                 notifyListenersDeviceError(CloverDeviceErrorEvent(errorType: CloverDeviceErrorType.COMMUNICATION_ERROR, code: 0, message: "printImageFromURL: The Clover Device is not ready"));
@@ -547,7 +547,7 @@ public class CloverConnector : NSObject, ICloverConnector {
         }
     }
     
-    /*public func printImage(_ image: UIImage) {
+    /*public func printImage(image: UIImage) {
         if let device = device {
             if !isReady {
                 notifyListenersDeviceError(CloverDeviceErrorEvent(errorType: CloverDeviceErrorType.COMMUNICATION_ERROR, code: 0, message: "printImage: The Clover Device is not ready"));
@@ -575,7 +575,7 @@ public class CloverConnector : NSObject, ICloverConnector {
     }
     
     @objc
-    public func openCashDrawer(_ reason:String) {
+    public func openCashDrawer(reason:String) {
         if let device = device {
             if !isReady {
                 notifyListenersDeviceError(CloverDeviceErrorEvent(errorType: CloverDeviceErrorType.COMMUNICATION_ERROR, code: 0, message: "openCashDrawer: The Clover Device is not ready"));
@@ -632,7 +632,7 @@ public class CloverConnector : NSObject, ICloverConnector {
     }
     
     @objc
-    public func showDisplayOrder(_ order: DisplayOrder) {
+    public func showDisplayOrder(order: DisplayOrder) {
         if let device = device {
             if !isReady {
                 notifyListenersDeviceError(CloverDeviceErrorEvent(errorType: CloverDeviceErrorType.COMMUNICATION_ERROR, code: 0, message: "showDisplayOrder: The Clover Device is not ready"));
@@ -646,7 +646,7 @@ public class CloverConnector : NSObject, ICloverConnector {
     }
     
     @objc
-    public func removeDisplayOrder(_ order: DisplayOrder) {
+    public func removeDisplayOrder(order: DisplayOrder) {
         if let device = device {
             if !isReady {
                 notifyListenersDeviceError(CloverDeviceErrorEvent(errorType: CloverDeviceErrorType.COMMUNICATION_ERROR, code: 0, message: "removeDisplayOrder: The Clover Device is not ready"));
@@ -660,7 +660,7 @@ public class CloverConnector : NSObject, ICloverConnector {
     
     
     @objc
-    public func invokeInputOption(_ inputOption:InputOption) {
+    public func invokeInputOption(inputOption:InputOption) {
         if let device = device {
             if !isReady {
                 notifyListenersDeviceError(CloverDeviceErrorEvent(errorType: CloverDeviceErrorType.COMMUNICATION_ERROR, code: 0, message: "invokeInputOption: The Clover Device is not ready"));
@@ -676,7 +676,7 @@ public class CloverConnector : NSObject, ICloverConnector {
 
     }
 
-    public func notifyListenersDeviceError(_ configError:CloverDeviceErrorEvent) {
+    public func notifyListenersDeviceError(configError:CloverDeviceErrorEvent) {
         broadcaster.notifyOnDeviceError(configError)
     }
     
@@ -745,17 +745,17 @@ public class CloverConnector : NSObject, ICloverConnector {
             self.cloverConnector = cloverConnector
         }
         
-        func onAuthTipAdjustedResponse(_ paymentId: String, amount: Int, success: Bool) {
+        func onAuthTipAdjustedResponse(paymentId: String, amount: Int, success: Bool) {
             onAuthTipAdjustedResponse(success, result: success ? ResultCode.SUCCESS : ResultCode.FAIL, reason: nil, message: nil, paymentId: paymentId, tipAmount: amount)
         }
-        func onAuthTipAdjustedResponse(_ success: Bool, result: ResultCode, reason:String?, message:String?, paymentId: String?=nil, tipAmount: Int?=nil) {
+        func onAuthTipAdjustedResponse(success: Bool, result: ResultCode, reason:String?, message:String?, paymentId: String?=nil, tipAmount: Int?=nil) {
             let taar = TipAdjustAuthResponse(success: success, result: result, paymentId: paymentId, tipAmount: tipAmount)
             taar.reason = reason
             taar.message = message
             cloverConnector.broadcaster.notifyOnTipAdjustAuthResponse(taar)
         }
         
-        func onCapturePreAuthResponse(_ status: ResultStatus, reason: String, paymentId: String?, amount: Int?, tipAmount: Int?) {
+        func onCapturePreAuthResponse(status: ResultStatus, reason: String, paymentId: String?, amount: Int?, tipAmount: Int?) {
             var success:Bool = false;
             switch(status) {
             case .SUCCESS: success = true; break
@@ -763,28 +763,28 @@ public class CloverConnector : NSObject, ICloverConnector {
             }
             onCapturePreAuthResponse(success, result: success ? ResultCode.SUCCESS : ResultCode.FAIL, reason: nil, message: nil, paymentId: paymentId, amount: amount, tipAmount: tipAmount)
         }
-        func onCapturePreAuthResponse(_ success:Bool, result: ResultCode, reason: String?, message: String?, paymentId: String?=nil, amount: Int?=nil, tipAmount: Int?=nil) {
+        func onCapturePreAuthResponse(success:Bool, result: ResultCode, reason: String?, message: String?, paymentId: String?=nil, amount: Int?=nil, tipAmount: Int?=nil) {
             let cpar = CapturePreAuthResponse(success: success, result: result, paymentId: paymentId, amount: amount, tipAmount: tipAmount)
             cpar.reason = reason
             cpar.message = message
             cloverConnector.broadcaster.notifyOnCapturePreAuth(cpar)
         }
         
-        func onCashbackSelectedResponse(_ cashbackAmount: Int) {
+        func onCashbackSelectedResponse(cashbackAmount: Int) {
             // TODO:
         }
         
-        func onDeviceConnected(_ device: CloverDevice) {
+        func onDeviceConnected(device: CloverDevice) {
             cloverConnector.isReady = false
             cloverConnector.broadcaster.notifyOnConnect()
         }
         
-        func onDeviceDisconnected(_ device: CloverDevice) {
+        func onDeviceDisconnected(device: CloverDevice) {
             cloverConnector.isReady = false
             cloverConnector.broadcaster.notifyOnDisconnect()
         }
         
-        func onDeviceReady(_ device: CloverDevice, discoveryResponseMessage: DiscoveryResponseMessage) {
+        func onDeviceReady(device: CloverDevice, discoveryResponseMessage: DiscoveryResponseMessage) {
             cloverConnector.isReady = discoveryResponseMessage.ready ?? false
             if(cloverConnector.isReady ?? false) {
                 cloverConnector.merchantInfo = MerchantInfo(id: discoveryResponseMessage.merchantId, mid: discoveryResponseMessage.merchantMId, name: discoveryResponseMessage.merchantName, deviceName: discoveryResponseMessage.name, deviceSerialNumber: discoveryResponseMessage.serial, deviceModel: discoveryResponseMessage.model)
@@ -795,7 +795,7 @@ public class CloverConnector : NSObject, ICloverConnector {
             }
         }
         
-        func onPaymentVoided(_ success: Bool, result:ResultCode, reason:String?, message:String?, payment: CLVModels.Payments.Payment?=nil, voidReason: VoidReason?=nil) {
+        func onPaymentVoided(success: Bool, result:ResultCode, reason:String?, message:String?, payment: CLVModels.Payments.Payment?=nil, voidReason: VoidReason?=nil) {
             cloverConnector.device?.doShowWelcomeScreen()
             let response = VoidPaymentResponse(success:success, result: result, paymentId: payment?.id, transactionNumber: payment?.cardTransaction?.transactionNo)
             response.reason = reason
@@ -804,11 +804,11 @@ public class CloverConnector : NSObject, ICloverConnector {
             cloverConnector.broadcaster.notifyOnVoidPaymentResponse(response);
         }
         
-        func onPaymentVoidedResponse(_ payment: CLVModels.Payments.Payment, voidReason: VoidReason) {
+        func onPaymentVoidedResponse(payment: CLVModels.Payments.Payment, voidReason: VoidReason) {
             onPaymentVoided(true, result: ResultCode.SUCCESS, reason:nil, message:nil, payment:payment, voidReason: voidReason)
         }
         
-        private func onVaultCardResponse(_ success:Bool, result:ResultCode, reason:String?, message:String?, vaultedCard:CLVModels.Payments.VaultedCard?=nil) {
+        private func onVaultCardResponse(success:Bool, result:ResultCode, reason:String?, message:String?, vaultedCard:CLVModels.Payments.VaultedCard?=nil) {
             cloverConnector.device?.doShowWelcomeScreen()
             let response = VaultCardResponse(success:success, result:result)
             response.reason = reason
@@ -817,16 +817,16 @@ public class CloverConnector : NSObject, ICloverConnector {
             cloverConnector.broadcaster.notifyOnVaultCardRespose(response)
             
         }
-        func onVaultCardResponse(_ vaultedCard: CLVModels.Payments.VaultedCard?, code: ResultStatus?, reason: String?) {
+        func onVaultCardResponse(vaultedCard: CLVModels.Payments.VaultedCard?, code: ResultStatus?, reason: String?) {
             onVaultCardResponse(code == .SUCCESS, result: code == .SUCCESS ? ResultCode.SUCCESS : ResultCode.FAIL, reason: reason, message: nil, vaultedCard: vaultedCard);
         }
         
-        func onCloseoutResponse(_ code: ResultStatus, reason: String, batch: CLVModels.Payments.Batch) {
+        func onCloseoutResponse(code: ResultStatus, reason: String, batch: CLVModels.Payments.Batch) {
             let response = CloseoutResponse(batch: batch, success: code == .SUCCESS, result: code == .SUCCESS ? ResultCode.SUCCESS : ResultCode.FAIL)
             cloverConnector.broadcaster.notifyOnCloseoutResponse(response)
         }
         
-        func onPaymentRefundResponse(_ orderId: String?, String paymentId: String?, refund: CLVModels.Payments.Refund?, code: TxState) {
+        func onPaymentRefundResponse(orderId: String?, String paymentId: String?, refund: CLVModels.Payments.Refund?, code: TxState) {
             
             let success:Bool = code == TxState.SUCCESS
             let resultCode = success ? ResultCode.SUCCESS : ResultCode.FAIL
@@ -834,7 +834,7 @@ public class CloverConnector : NSObject, ICloverConnector {
             // listener will be notified in onFinishOk
         }
         
-        private func onFinishCancel(_ success: Bool, result:ResultCode, reason:String?, message:String?) {
+        private func onFinishCancel(success: Bool, result:ResultCode, reason:String?, message:String?) {
             
             
             if let lastReq = lastRequest {
@@ -885,13 +885,13 @@ public class CloverConnector : NSObject, ICloverConnector {
             onFinishCancel(false, result: ResultCode.CANCEL, reason: nil, message: nil)
         }
         
-        func onFinishOk(_ credit: CLVModels.Payments.Credit) {
+        func onFinishOk(credit: CLVModels.Payments.Credit) {
             lastRequest = nil
             let response = ManualRefundResponse(success: true, result: .SUCCESS, credit:credit, transactionNumber: credit.cardTransaction?.transactionNo)
             cloverConnector.broadcaster.notifyOnManualRefundResponse(response)
         }
         
-        func onFinishOk(_ payment: CLVModels.Payments.Payment, signature: Signature?) {
+        func onFinishOk(payment: CLVModels.Payments.Payment, signature: Signature?) {
             
             cloverConnector.device?.doShowWelcomeScreen() // doing this first allows the handlers to change the UI behavior
 
@@ -922,7 +922,7 @@ public class CloverConnector : NSObject, ICloverConnector {
  
         }
         
-        func onFinishOk(_ refund: CLVModels.Payments.Refund) {
+        func onFinishOk(refund: CLVModels.Payments.Refund) {
             lastRequest = nil
             cloverConnector.device?.doShowWelcomeScreen();
                 // Since finishOk is the more appropriate/consistent location in the "flow" to
@@ -945,19 +945,19 @@ public class CloverConnector : NSObject, ICloverConnector {
                 }
         }
         
-        func onKeyPressed(_ keyPress: KeyPress) {
+        func onKeyPressed(keyPress: KeyPress) {
             
         }
         
-        func onPartialAuthResponse(_ partialAuthAmount: Int) {
+        func onPartialAuthResponse(partialAuthAmount: Int) {
             // TODO:
         }
         
-        func onTipAddedResponse(_ tipAmount: Int) {
+        func onTipAddedResponse(tipAmount: Int) {
             cloverConnector.broadcaster.notifyOnTipAdded(tipAmount);
         }
         
-        func onTxStartResponse(_ result:TxStartResponseResult?, externalId:String) {
+        func onTxStartResponse(result:TxStartResponseResult?, externalId:String) {
             if let result = result {
                 let success:Bool = result == TxStartResponseResult.SUCCESS ? true : false;
                 if (success)
@@ -1042,7 +1042,7 @@ public class CloverConnector : NSObject, ICloverConnector {
 
         }
     
-        func onUiState(_ uiState: UiState, uiText: String, uiDirection: UiState.UiDirection, inputOptions: [InputOption]?) {
+        func onUiState(uiState: UiState, uiText: String, uiDirection: UiState.UiDirection, inputOptions: [InputOption]?) {
             if(uiDirection == UiState.UiDirection.ENTER) {
                 cloverConnector.broadcaster.notifyOnDeviceActivityStart(CloverDeviceEvent(eventState: "\(uiState)", message: uiText, inputOptions: inputOptions))
             } else if (uiDirection == UiState.UiDirection.EXIT) {
@@ -1050,7 +1050,7 @@ public class CloverConnector : NSObject, ICloverConnector {
             }
         }
         
-        func onVerifySignature(_ payment: CLVModels.Payments.Payment, signature: Signature?) {
+        func onVerifySignature(payment: CLVModels.Payments.Payment, signature: Signature?) {
             let svr:VerifySignatureRequest = VerifySignatureRequest()
             svr.payment = payment
             svr.signature = signature
@@ -1058,7 +1058,7 @@ public class CloverConnector : NSObject, ICloverConnector {
             cloverConnector.broadcaster.notifyOnVerifySignatureRequest(svr)
         }
         
-        func onConfirmPayment(_ payment: CLVModels.Payments.Payment?, challenges: [Challenge]?) {
+        func onConfirmPayment(payment: CLVModels.Payments.Payment?, challenges: [Challenge]?) {
             let cpr = ConfirmPaymentRequest()
             cpr.payment = payment
             cpr.challenges = challenges
@@ -1066,56 +1066,56 @@ public class CloverConnector : NSObject, ICloverConnector {
         }
  
         // TODO:
-        func onMessageAck(_ sourceMessageId: String) {
+        func onMessageAck(sourceMessageId: String) {
             
         }
         
-        func onPendingPaymentsResponse(_ success: Bool, payments: [PendingPaymentEntry]?) {
+        func onPendingPaymentsResponse(success: Bool, payments: [PendingPaymentEntry]?) {
             let ppr = RetrievePendingPaymentsResponse(code: success ? ResultCode.SUCCESS : ResultCode.FAIL, message:"", payments:payments)
 
             cloverConnector.broadcaster.notifyOnPendingPaymentsResponse(ppr);
         }
         
-        func onPrintCredit(_ credit: CLVModels.Payments.Credit) {
+        func onPrintCredit(credit: CLVModels.Payments.Credit) {
             let printCreditResponse = PrintManualRefundReceiptMessage(credit: credit)
             printCreditResponse.credit = credit
             cloverConnector.broadcaster.notifyPrintCredit(printCreditResponse)
         }
         
-        func onPrintCreditDecline(_ reason: String, credit: CLVModels.Payments.Credit?) {
+        func onPrintCreditDecline(reason: String, credit: CLVModels.Payments.Credit?) {
             let printCreditDecline = PrintManualRefundDeclineReceiptMessage(credit: credit, reason: reason)
             
             cloverConnector.broadcaster.notifyPrintCreditDecline(printCreditDecline)
         }
         
-        func onPrintMerchantReceipt(_ payment: CLVModels.Payments.Payment?) {
+        func onPrintMerchantReceipt(payment: CLVModels.Payments.Payment?) {
             let printMerchant = PrintPaymentMerchantCopyReceiptMessage(payment: payment!)
             cloverConnector.broadcaster.notifyOnPrintMerchantReceipt(printMerchant)
         }
         
-        func onPrintPayment(_ order: CLVModels.Order.Order?, payment: CLVModels.Payments.Payment?) {
+        func onPrintPayment(order: CLVModels.Order.Order?, payment: CLVModels.Payments.Payment?) {
             let printPayment = PrintPaymentReceiptMessage(payment: payment!, order: order!)
             cloverConnector.broadcaster.notifyOnPrintPaymentReceipt(printPayment)
         }
         
-        func onPrintPaymentDecline(_ reason: String, payment: CLVModels.Payments.Payment?) {
+        func onPrintPaymentDecline(reason: String, payment: CLVModels.Payments.Payment?) {
             let printDecline = PrintPaymentDeclineReceiptMessage(payment: payment!, reason: reason)
             cloverConnector.broadcaster.notifyOnPrintPaymentDeclineReceipt(printDecline)
         }
         
-        func onPrintRefundPayment(_ refund: CLVModels.Payments.Refund?, payment: CLVModels.Payments.Payment?, order: CLVModels.Order.Order?) {
+        func onPrintRefundPayment(refund: CLVModels.Payments.Refund?, payment: CLVModels.Payments.Payment?, order: CLVModels.Order.Order?) {
             let printRefundPayment = PrintRefundPaymentReceiptMessage(payment: payment!, order: order!, refund: refund!)
             cloverConnector.broadcaster.notifyOnPrintPaymentRefund(printRefundPayment)
         }
         
-        func onReadCardResponse(_ status: ResultStatus, reason: String, cardData: CardData?) {
+        func onReadCardResponse(status: ResultStatus, reason: String, cardData: CardData?) {
             let rcdr = ReadCardDataResponse(success: status == .SUCCESS, result: status == .SUCCESS ? ResultCode.SUCCESS : ResultCode.CANCEL)
             rcdr.cardData = cardData
             
             cloverConnector.broadcaster.notifyOnReadCardResponse(rcdr);
         }
         
-        func onTxStartResponse(_ result: TxStartResponseResult, externalId: String) {
+        func onTxStartResponse(result: TxStartResponseResult, externalId: String) {
             let success = result == TxStartResponseResult.SUCCESS ? true : false
             if (success)
             {

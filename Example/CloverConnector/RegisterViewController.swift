@@ -53,11 +53,11 @@ class RegisterViewController:UIViewController, POSOrderListener, POSStoreListene
         (UIApplication.sharedApplication().delegate as! AppDelegate).cloverConnectorListener?.viewController = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(animated: Bool) {
         (UIApplication.sharedApplication().delegate as! AppDelegate).cloverConnectorListener?.viewController = self
     }
     
-    @IBAction func longPressHandler(_ sender: UILongPressGestureRecognizer) {
+    @IBAction func longPressHandler(sender: UILongPressGestureRecognizer) {
         var cgPoint = sender.locationInView(self.currentOrderListItems)
         
         var indexPath = currentOrderListItems.indexPathForRowAtPoint(cgPoint)
@@ -70,7 +70,7 @@ class RegisterViewController:UIViewController, POSOrderListener, POSStoreListene
             }
         }
     }
-    func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+    func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
         var cgPoint = gestureRecognizer.locationInView(self.currentOrderListItems)
         
         var indexPath = currentOrderListItems.indexPathForRowAtPoint( cgPoint)
@@ -87,7 +87,7 @@ class RegisterViewController:UIViewController, POSOrderListener, POSStoreListene
     var startPan:CGPoint?
     var startOffset:CGFloat = 0.0
 
-    func panCurrentOrderView(_ sender:UIPanGestureRecognizer) {
+    func panCurrentOrderView(sender:UIPanGestureRecognizer) {
         
         
         //var p:CGPoint = currentOrderView.locationInView(parentView)
@@ -165,7 +165,7 @@ class RegisterViewController:UIViewController, POSOrderListener, POSStoreListene
         }
     }
 
-    @objc func touchCurrentOrderView(_ sender:UITapGestureRecognizer) {
+    @objc func touchCurrentOrderView(sender:UITapGestureRecognizer) {
         if(true) {
             return
         }
@@ -210,7 +210,7 @@ class RegisterViewController:UIViewController, POSOrderListener, POSStoreListene
     var itemsToDi = NSMutableDictionary()
     
     // POSOrderListener
-    func itemAdded(_ item:POSLineItem) {
+    func itemAdded(item:POSLineItem) {
         updateTotals()
         
         let displayLineItem = DisplayLineItem(id:"\(arc4random())", name:item.item.name!, price: "\(CurrencyUtils.IntToFormat(item.item.price)!)", quantity: "\(item.quantity)")
@@ -219,11 +219,11 @@ class RegisterViewController:UIViewController, POSOrderListener, POSStoreListene
 
         (UIApplication.sharedApplication().delegate as! AppDelegate).cloverConnector?.showDisplayOrder(currentDisplayOrder)
     }
-    func itemRemoved(_ item:POSLineItem) {
+    func itemRemoved(item:POSLineItem) {
         updateTotals()
         (UIApplication.sharedApplication().delegate as! AppDelegate).cloverConnector?.showDisplayOrder(currentDisplayOrder)
     }
-    func itemModified(_ item:POSLineItem) {
+    func itemModified(item:POSLineItem) {
         updateTotals()
         if let displayLineItem = itemsToDi.objectForKey(item.item.id) as? DisplayLineItem {
             displayLineItem.quantity = "\(item.quantity)"
@@ -234,22 +234,22 @@ class RegisterViewController:UIViewController, POSOrderListener, POSStoreListene
         (UIApplication.sharedApplication().delegate as! AppDelegate).cloverConnector?.showDisplayOrder(currentDisplayOrder)
 
     }
-    func discountAdded(_ item:POSDiscount) {
+    func discountAdded(item:POSDiscount) {
         updateTotals()
     }
-    func paymentAdded(_ item:POSPayment) {
+    func paymentAdded(item:POSPayment) {
         updateTotals()
     }
-    func refundAdded(_ refund: POSRefund) {
+    func refundAdded(refund: POSRefund) {
         updateTotals()
     }
-    func paymentChanged(_ item:POSPayment) {
+    func paymentChanged(item:POSPayment) {
         updateTotals()
     }
     // POSOrderListener.End
     
     // POSStoreListener
-    func newOrderCreated(_ order:POSOrder) {
+    func newOrderCreated(order:POSOrder) {
         updateTotals()
         (UIApplication.sharedApplication().delegate as! AppDelegate).cloverConnector?.removeDisplayOrder(currentDisplayOrder)
         currentDisplayOrder = DisplayOrder()
@@ -258,15 +258,15 @@ class RegisterViewController:UIViewController, POSOrderListener, POSStoreListene
         
     }
     
-    func preAuthAdded(_ payment: POSPayment) {
+    func preAuthAdded(payment: POSPayment) {
         // not needed in register
     }
     
-    func preAuthRemoved(_ payment: POSPayment) {
+    func preAuthRemoved(payment: POSPayment) {
         // not needed in register
     }
     
-    func vaultCardAdded(_ card: POSCard) {
+    func vaultCardAdded(card: POSCard) {
         // not needed in register
     }
     
@@ -332,11 +332,11 @@ class RegisterViewController:UIViewController, POSOrderListener, POSStoreListene
     }
     
     // Collection View
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return (store?.availableItems.count)!
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell:UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier( "AvailableItemCell", forIndexPath: indexPath)
         
         if let store = store,
@@ -363,7 +363,7 @@ class RegisterViewController:UIViewController, POSOrderListener, POSStoreListene
     
     }*/
     
-    func verifySignature(_ signatureVerifyRequest:VerifySignatureRequest) {
+    func verifySignature(signatureVerifyRequest:VerifySignatureRequest) {
         self.signatureVerifyRequest = signatureVerifyRequest
         self.performSegueWithIdentifier( "ShowSignature", sender: self)
 //        ivc.showViewController(SignatureViewController(), sender: self)
@@ -373,7 +373,7 @@ class RegisterViewController:UIViewController, POSOrderListener, POSStoreListene
         (segue.destinationViewController as? SignatureViewController)?.signatureVerifyRequest = self.signatureVerifyRequest
     }
     
-    @IBAction func saleButtonClicked(_ sender: UIButton) {
+    @IBAction func saleButtonClicked(sender: UIButton) {
         
         if let currentOrder = store?.currentOrder {
             let sr = SaleRequest(amount:currentOrder.getTotal(), externalId: "\(arc4random())")
@@ -384,7 +384,7 @@ class RegisterViewController:UIViewController, POSOrderListener, POSStoreListene
             (UIApplication.sharedApplication().delegate as! AppDelegate).cloverConnector?.sale(sr)
         }
     }
-    @IBAction func authButtonClicked(_ sender: UIButton) {
+    @IBAction func authButtonClicked(sender: UIButton) {
         
         if let currentOrder = store?.currentOrder {
             let ar = AuthRequest(amount: currentOrder.getTotal(), externalId: "\(arc4random())")
@@ -393,7 +393,7 @@ class RegisterViewController:UIViewController, POSOrderListener, POSStoreListene
             (UIApplication.sharedApplication().delegate as! AppDelegate).cloverConnector?.auth(ar)
         }
     }
-    @IBAction func newOrderButtonClicked(_ sender: UIButton) {
+    @IBAction func newOrderButtonClicked(sender: UIButton) {
         if let store = store {
             store.newOrder()
         }

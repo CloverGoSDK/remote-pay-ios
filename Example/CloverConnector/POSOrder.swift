@@ -31,11 +31,11 @@ public class POSOrder {
     public private(set) var payments:NSMutableArray = NSMutableArray()
     public private(set) var refunds:NSMutableArray = NSMutableArray()
     
-    public func addListener(_ listener:POSOrderListener) {
+    public func addListener(listener:POSOrderListener) {
         orderListeners.addObject(listener)
     }
     
-    public func removeListener(_ listener:POSOrderListener) {
+    public func removeListener(listener:POSOrderListener) {
         orderListeners.removeObject(listener)
     }
     
@@ -110,12 +110,12 @@ public class POSOrder {
         return Int(amountPaid)
     }
     
-    public func addPayment(_ payment:POSPayment) {
+    public func addPayment(payment:POSPayment) {
         payments.addObject(payment)
         notifyListenersPaymentAdded(payment)
     }
     
-    public func removeLineItem(_ lineItem:POSLineItem) {
+    public func removeLineItem(lineItem:POSLineItem) {
         lineItem.quantity -= 1
         
         if lineItem.quantity == 0 {
@@ -134,7 +134,7 @@ public class POSOrder {
         
     }
     
-    public func addLineItem(_ lineItem:POSLineItem) {
+    public func addLineItem(lineItem:POSLineItem) {
         var incrementingOnly = false
         var newOrUpdatedLineItem:POSLineItem?
         for var li in items {
@@ -159,7 +159,7 @@ public class POSOrder {
         }
     }
     
-    public func addRefund(_ refund:POSRefund) {
+    public func addRefund(refund:POSRefund) {
         for var payment in payments {
             if let payment = payment as? POSPayment {
                 if payment.paymentId == refund.paymentId {
@@ -174,20 +174,20 @@ public class POSOrder {
     }
     
     
-    private func notifyListenersPaymentAdded(_ payment:POSPayment) {
+    private func notifyListenersPaymentAdded(payment:POSPayment) {
         for var listener in orderListeners {
             (listener as? POSOrderListener)!.paymentAdded(payment);
         }
     }
     
-    private func notifyListenersPaymentChanged(_ payment:POSPayment) {
+    private func notifyListenersPaymentChanged(payment:POSPayment) {
         for var listener in orderListeners {
             (listener as? POSOrderListener)!.paymentChanged(payment);
         }
     }
     
     
-    private func notifyListenersRefundAdded(_ refund:POSRefund) {
+    private func notifyListenersRefundAdded(refund:POSRefund) {
         for var listener in orderListeners {
             (listener as? POSOrderListener)!.refundAdded(refund);
         }
@@ -202,11 +202,11 @@ public enum OrderStatus : String {
 }
 
 public protocol POSOrderListener : AnyObject {
-    func itemAdded(_ item:POSLineItem)
-    func itemRemoved(_ item:POSLineItem)
-    func itemModified(_ item:POSLineItem)
-    func discountAdded(_ item:POSDiscount)
-    func paymentAdded(_ item:POSPayment)
-    func refundAdded(_ refund:POSRefund)
-    func paymentChanged(_ item:POSPayment)
+    func itemAdded(item:POSLineItem)
+    func itemRemoved(item:POSLineItem)
+    func itemModified(item:POSLineItem)
+    func discountAdded(item:POSDiscount)
+    func paymentAdded(item:POSPayment)
+    func refundAdded(refund:POSRefund)
+    func paymentChanged(item:POSPayment)
 }

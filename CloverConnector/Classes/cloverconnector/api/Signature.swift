@@ -20,7 +20,7 @@ public class Signature:Mappable {
 
   }
 
-  required public init?(_ map: Map) {
+  required public init?(map: Map) {
     
   }
 
@@ -40,7 +40,7 @@ public class Signature:Mappable {
     public class Stroke:Mappable {
         public var points:Array<Point>?
         
-        required public init?(_ map: Map) {
+        required public init?(map: Map) {
             
         }
         

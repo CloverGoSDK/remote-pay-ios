@@ -16,7 +16,7 @@ public class CardDataRequestMessage:Message {
         super.init(method: .CARD_DATA)
     }
     
-    public required init?(_ map:Map) {
+    public required init?(map:Map) {
         super.init(method: .CARD_DATA)
     }
     

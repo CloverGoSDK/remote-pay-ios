@@ -16,7 +16,7 @@ class RetrievePendingPaymentsResponseMessage : Message
     public var status:ResultStatus?
     public var reason:String?
     
-    public required init?(_ map:Map) {
+    public required init?(map:Map) {
         super.init(method: Method.RETRIEVE_PENDING_PAYMENTS_RESPONSE)
     }
     

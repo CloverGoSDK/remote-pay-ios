@@ -12,18 +12,18 @@ protocol CloverTransportObserver : AnyObject{
     /// <summary>
     /// Device is there but not yet ready for use
     /// </summary>
-    func onDeviceConnected(_ transport:CloverTransport)
+    func onDeviceConnected(transport:CloverTransport)
     
     /// <summary>
     /// Device is there and ready for use
     /// </summary>
-    func onDeviceReady(_ transport:CloverTransport)
+    func onDeviceReady(transport:CloverTransport)
     
     /// <summary>
     /// Device is not there anymore
     /// </summary>
     /// <param name="transport"></param>
-    func onDeviceDisconnected(_ transport:CloverTransport)
+    func onDeviceDisconnected(transport:CloverTransport)
     
-    func onMessage(_ message:String)
+    func onMessage(message:String)
 }

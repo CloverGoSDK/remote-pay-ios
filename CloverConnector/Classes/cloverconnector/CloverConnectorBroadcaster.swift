@@ -13,17 +13,17 @@ import Foundation
 public class CloverConnectorBroadcaster {
     var listeners = NSMutableArray()
     
-    public func addObject(_ listener:ICloverConnectorListener) {
+    public func addObject(listener:ICloverConnectorListener) {
         if listeners.indexOfObject(listener) != -1 {
             listeners.addObject(listener)
         }
     }
     
-    public func removeObject(_ listener:ICloverConnectorListener) {
+    public func removeObject(listener:ICloverConnectorListener) {
         listeners.removeObject(listener)
     }
     
-    public func notifyOnTipAdded(_ tip:Int) {
+    public func notifyOnTipAdded(tip:Int) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 //listener.onTipAdded(TipAddedMessage(tip))
@@ -33,7 +33,7 @@ public class CloverConnectorBroadcaster {
     
     
     
-    public func notifyOnPaymentRefundResponse(_ refundPaymentResponse:RefundPaymentResponse) {
+    public func notifyOnPaymentRefundResponse(refundPaymentResponse:RefundPaymentResponse) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onRefundPaymentResponse(refundPaymentResponse)
@@ -41,7 +41,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnCloseoutResponse(_ closeoutResponse:CloseoutResponse) {
+    public func notifyOnCloseoutResponse(closeoutResponse:CloseoutResponse) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onCloseoutResponse(closeoutResponse)
@@ -49,7 +49,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnDeviceActivityStart(_ deviceEvent:CloverDeviceEvent) {
+    public func notifyOnDeviceActivityStart(deviceEvent:CloverDeviceEvent) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onDeviceActivityStart(deviceEvent)
@@ -57,7 +57,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnDeviceActivityEnd(_ deviceEvent:CloverDeviceEvent) {
+    public func notifyOnDeviceActivityEnd(deviceEvent:CloverDeviceEvent) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onDeviceActivityEnd(deviceEvent)
@@ -66,7 +66,7 @@ public class CloverConnectorBroadcaster {
         
     }
     
-    public func notifyOnDeviceError(_ deviceError:CloverDeviceErrorEvent) {
+    public func notifyOnDeviceError(deviceError:CloverDeviceErrorEvent) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onDeviceError(deviceError);
@@ -74,7 +74,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnSaleResponse(_ response:SaleResponse) {
+    public func notifyOnSaleResponse(response:SaleResponse) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener
             {
@@ -83,7 +83,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnAuthResponse(_ response:AuthResponse) {
+    public func notifyOnAuthResponse(response:AuthResponse) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onAuthResponse(response)
@@ -91,7 +91,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnManualRefundResponse(_ response:ManualRefundResponse) {
+    public func notifyOnManualRefundResponse(response:ManualRefundResponse) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onManualRefundResponse(response)
@@ -99,7 +99,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnVerifySignatureRequest(_ request:VerifySignatureRequest) {
+    public func notifyOnVerifySignatureRequest(request:VerifySignatureRequest) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onVerifySignatureRequest(request)
@@ -107,7 +107,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnConfirmPayment(_ request:ConfirmPaymentRequest) {
+    public func notifyOnConfirmPayment(request:ConfirmPaymentRequest) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onConfirmPaymentRequest(request)
@@ -115,7 +115,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnVoidPaymentResponse(_ response:VoidPaymentResponse) {
+    public func notifyOnVoidPaymentResponse(response:VoidPaymentResponse) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onVoidPaymentResponse(response)
@@ -139,7 +139,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnReady(_ merchantInfo:MerchantInfo) {
+    public func notifyOnReady(merchantInfo:MerchantInfo) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onDeviceReady(merchantInfo)
@@ -147,7 +147,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnTipAdjustAuthResponse(_ response:TipAdjustAuthResponse) {
+    public func notifyOnTipAdjustAuthResponse(response:TipAdjustAuthResponse) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onTipAdjustAuthResponse(response);
@@ -156,7 +156,7 @@ public class CloverConnectorBroadcaster {
     }
     
 //    public func notifyOnTxState(txState:TxState) {
-    public func notifyOnTxState(_ txState:Any) {
+    public func notifyOnTxState(txState:Any) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
 //                listener.onTransactionState(txState)
@@ -164,7 +164,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnVaultCardRespose(_ ccr:VaultCardResponse) {
+    public func notifyOnVaultCardRespose(ccr:VaultCardResponse) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onVaultCardResponse(ccr)
@@ -172,7 +172,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnPreAuthResponse(_ response:PreAuthResponse) {
+    public func notifyOnPreAuthResponse(response:PreAuthResponse) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onPreAuthResponse(response)
@@ -183,7 +183,7 @@ public class CloverConnectorBroadcaster {
 
     
 //    public func notifyOnCapturePreAuth(response:CaptureAuthResponse) {
-    public func notifyOnCapturePreAuth(_ response:CapturePreAuthResponse) {
+    public func notifyOnCapturePreAuth(response:CapturePreAuthResponse) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onCapturePreAuthResponse(response)
@@ -192,7 +192,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnPendingPaymentsResponse(_ response:RetrievePendingPaymentsResponse) {
+    public func notifyOnPendingPaymentsResponse(response:RetrievePendingPaymentsResponse) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onRetrievePendingPaymentsResponse(response)
@@ -201,7 +201,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyPrintCredit(_ response:PrintManualRefundReceiptMessage) {
+    public func notifyPrintCredit(response:PrintManualRefundReceiptMessage) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onPrintManualRefundReceipt(response)
@@ -209,7 +209,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyPrintCreditDecline(_ response:PrintManualRefundDeclineReceiptMessage) {
+    public func notifyPrintCreditDecline(response:PrintManualRefundDeclineReceiptMessage) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onPrintManualRefundDeclineReceipt(response)
@@ -218,7 +218,7 @@ public class CloverConnectorBroadcaster {
     }
     
     
-    public func notifyOnPrintMerchantReceipt(_ response: PrintPaymentMerchantCopyReceiptMessage) {
+    public func notifyOnPrintMerchantReceipt(response: PrintPaymentMerchantCopyReceiptMessage) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onPrintPaymentMerchantCopyReceipt(response)
@@ -226,7 +226,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnPrintPaymentReceipt(_ response: PrintPaymentReceiptMessage) {
+    public func notifyOnPrintPaymentReceipt(response: PrintPaymentReceiptMessage) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onPrintPaymentReceipt(response)
@@ -234,7 +234,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnPrintPaymentDeclineReceipt(_ response: PrintPaymentDeclineReceiptMessage) {
+    public func notifyOnPrintPaymentDeclineReceipt(response: PrintPaymentDeclineReceiptMessage) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onPrintPaymentDeclineReceipt(response)
@@ -242,7 +242,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnPrintPaymentRefund(_ response: PrintRefundPaymentReceiptMessage) {
+    public func notifyOnPrintPaymentRefund(response: PrintRefundPaymentReceiptMessage) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onPrintRefundPaymentReceipt(response)
@@ -250,7 +250,7 @@ public class CloverConnectorBroadcaster {
         }
     }
     
-    public func notifyOnReadCardResponse(_ response: ReadCardDataResponse) {
+    public func notifyOnReadCardResponse(response: ReadCardDataResponse) {
         for listener in listeners {
             if let listener = listener as? ICloverConnectorListener {
                 listener.onReadCardDataResponse(response)

@@ -29,7 +29,7 @@ public class VoidCreditRequest:Mappable {
 
   }
 
-  required public init?(_ map: Map) {
+  required public init?(map: Map) {
   }
 
   public func mapping(map:Map) {

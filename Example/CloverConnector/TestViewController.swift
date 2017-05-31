@@ -67,7 +67,7 @@ public class TestViewController: UIViewController, UITableViewDelegate, UITableV
 
     }
     
-    public override func viewDidAppear(_ animated: Bool) {
+    public override func viewDidAppear(animated: Bool) {
         print("Test Did Appear")
         print("adding test listener")
         if let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
@@ -79,7 +79,7 @@ public class TestViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
     
-    public override func viewDidDisappear(_ animated: Bool) {
+    public override func viewDidDisappear(animated: Bool) {
         print("Test Disappeared")
         if let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
             appDelegate.cloverConnector?.removeCloverConnectorListener(appDelegate.testCloverConnectorListener!)
@@ -87,7 +87,7 @@ public class TestViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    @IBAction func handleLongPress(_ sender: UILongPressGestureRecognizer) {
+    @IBAction func handleLongPress(sender: UILongPressGestureRecognizer) {
         if sender.state == .Began {
             let p = sender.locationInView(testResultsTable)
             let indexPath = testResultsTable.indexPathForRowAtPoint(p)
@@ -121,7 +121,7 @@ public class TestViewController: UIViewController, UITableViewDelegate, UITableV
     
     var selTestCase:Case?
     
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: NSIndexPath) {
+    public func tableView(tableView: UITableView, didSelectRowAt indexPath: NSIndexPath) {
         selTestCase = cases.objectAtIndex(indexPath.row) as? Case
 //        if let tvc = self.storyboard?.instantiateViewController(withIdentifier: "TestDetails") as? TestDetailsViewController {
 //            tvc.testCase = selTestCase
@@ -143,21 +143,21 @@ public class TestViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     
-    @IBAction func rerunTests(_ sender: AnyObject) {
+    @IBAction func rerunTests(sender: AnyObject) {
         self.caseRunner?.restart()
     }
 
-    @IBAction func loadTests(_ sender: UIButton) {
+    @IBAction func loadTests(sender: UIButton) {
         loadAndRunTests(false)
     }
     
-    @IBAction func loadAndRunTests(_ sender: UIButton) {
+    @IBAction func loadAndRunTests(sender: UIButton) {
 
         loadAndRunTests(true)
     }
     
     
-    private func loadAndRunTests(_ autoRun:Bool) {
+    private func loadAndRunTests(autoRun:Bool) {
         var loadData:NSData?
         cases.removeAllObjects()
         testResultsTable.reloadData()
@@ -201,7 +201,7 @@ public class TestViewController: UIViewController, UITableViewDelegate, UITableV
             
             let json:JSON = JSON(data: data)
             if let jsonCases = json[JSON_KEYS.CASES].array {
-                self.caseRunner = CaseRunner(jsonCases)
+                self.caseRunner = CaseRunner(jsonCases: jsonCases)
                 self.caseRunner?.onTestStarted = {
                     (cs:Case) -> Void in
                     if(!self.cases.containsObject(cs)) {
@@ -237,7 +237,7 @@ class CaseRunner {
     
     private var nextCaseIndex = 0
     
-    init(_ jsonCases:[JSON]) {
+    init(jsonCases:[JSON]) {
         print(cases.count)
         for var jSON in jsonCases {
             let cs = Case(name: jSON["name"].string, json: jSON, onComplete: {})
@@ -270,7 +270,7 @@ class CaseRunner {
             runningCase = nil
         }
     }
-    func runCase(_ index:Int) {
+    func runCase(index:Int) {
         if self.cases.count > (index-1) {
             
         }
@@ -321,7 +321,7 @@ class ResponseCloverConnector : DefaultCloverConnectorListener {
             }
         }
     }
-    override func onConfirmPaymentRequest(_ request: ConfirmPaymentRequest) {
+    override func onConfirmPaymentRequest(request: ConfirmPaymentRequest) {
         if let json = self.deviceRequests {
             
             let confirmMappings = json["onConfirmPayment"]
@@ -337,7 +337,7 @@ class ResponseCloverConnector : DefaultCloverConnectorListener {
         // accept by default
         cloverConnector?.acceptPayment(request.payment!)
     }
-    override func onVerifySignatureRequest(_ signatureVerifyRequest: VerifySignatureRequest) {
+    override func onVerifySignatureRequest(signatureVerifyRequest: VerifySignatureRequest) {
         if let json = self.deviceRequests {
             if "REJECT" == json["onVerifySignature"] {
                 cloverConnector?.rejectSignature(signatureVerifyRequest)
@@ -348,13 +348,13 @@ class ResponseCloverConnector : DefaultCloverConnectorListener {
         cloverConnector?.acceptSignature(signatureVerifyRequest)
     }
     
-    override func onDeviceActivityStart(_ deviceEvent: CloverDeviceEvent) {
+    override func onDeviceActivityStart(deviceEvent: CloverDeviceEvent) {
         if let io = self.ioMap[deviceEvent.eventState ?? ""] {
             cloverConnector?.invokeInputOption(io)
         }
     }
     //
-    public func compare(_ jsonA:JSON, within:JSON) -> (Bool, String?) {
+    public func compare(jsonA:JSON, within:JSON) -> (Bool, String?) {
         
         if let keys = jsonA.dictionary?.keys {
             
@@ -399,29 +399,29 @@ class TestResponseCloverConnector : ResponseCloverConnector {
         self.store = store
     }
     
-    override func onSaleResponse(_ response: SaleResponse) {
+    override func onSaleResponse(response: SaleResponse) {
         let jsonString = Mapper().toJSONString(response, prettyPrint: false)
         storePaymentResponse(response)
         compare(jsonString)
     }
-    override func onAuthResponse(_ authResponse: AuthResponse) {
+    override func onAuthResponse(authResponse: AuthResponse) {
         let jsonString = Mapper().toJSONString(authResponse, prettyPrint: false)
         storePaymentResponse(authResponse)
         compare(jsonString)
     }
     
-    override func onPreAuthResponse(_ preAuthResponse: PreAuthResponse) {
+    override func onPreAuthResponse(preAuthResponse: PreAuthResponse) {
         let jsonString = Mapper().toJSONString(preAuthResponse, prettyPrint: false)
         storePaymentResponse(preAuthResponse)
         compare(jsonString)
     }
     
-    override func onManualRefundResponse(_ manualRefundResponse: ManualRefundResponse) {
+    override func onManualRefundResponse(manualRefundResponse: ManualRefundResponse) {
         let jsonString = Mapper().toJSONString(manualRefundResponse, prettyPrint: false)
         compare(jsonString)
     }
     
-    override func onVaultCardResponse(_ vaultCardResponse: VaultCardResponse) {
+    override func onVaultCardResponse(vaultCardResponse: VaultCardResponse) {
         let jsonString = Mapper().toJSONString(vaultCardResponse, prettyPrint: false)
         
         if store?["vaultedCard"] != nil,
@@ -432,7 +432,7 @@ class TestResponseCloverConnector : ResponseCloverConnector {
         compare(jsonString)
     }
     
-    override func onTipAdjustAuthResponse(_ tipAdjustAuthResponse: TipAdjustAuthResponse) {
+    override func onTipAdjustAuthResponse(tipAdjustAuthResponse: TipAdjustAuthResponse) {
         let jsonString = Mapper().toJSONString(tipAdjustAuthResponse, prettyPrint: false)
         if store?[JSON_KEYS.PAYMENT_ID] != nil {
             if let key = store?[JSON_KEYS.PAYMENT_ID].string {
@@ -442,17 +442,17 @@ class TestResponseCloverConnector : ResponseCloverConnector {
         compare(jsonString)
     }
     
-    override func onRefundPaymentResponse(_ refundPaymentResponse: RefundPaymentResponse) {
+    override func onRefundPaymentResponse(refundPaymentResponse: RefundPaymentResponse) {
         let jsonString = Mapper().toJSONString(refundPaymentResponse, prettyPrint: false)
         compare(jsonString)
     }
     
-    override func onVoidPaymentResponse(_ voidPaymentResponse: VoidPaymentResponse) {
+    override func onVoidPaymentResponse(voidPaymentResponse: VoidPaymentResponse) {
         let jsonString = Mapper().toJSONString(voidPaymentResponse, prettyPrint: false)
         compare(jsonString)
     }
     
-    override func onCapturePreAuthResponse(_ capturePreAuthResponse: CapturePreAuthResponse) {
+    override func onCapturePreAuthResponse(capturePreAuthResponse: CapturePreAuthResponse) {
         let jsonString = Mapper().toJSONString(capturePreAuthResponse, prettyPrint: false)
         
         if store?[JSON_KEYS.PAYMENT_ID] != nil {
@@ -474,22 +474,22 @@ class TestResponseCloverConnector : ResponseCloverConnector {
         compare(jsonString)
     }
     
-    override func onReadCardDataResponse(_ readCardDataResponse: ReadCardDataResponse) {
+    override func onReadCardDataResponse(readCardDataResponse: ReadCardDataResponse) {
         let jsonString = Mapper().toJSONString(readCardDataResponse, prettyPrint: false)
         compare(jsonString)
     }
 
-    override func onRetrievePendingPaymentsResponse(_ retrievePendingPaymentResponse: RetrievePendingPaymentsResponse) {
+    override func onRetrievePendingPaymentsResponse(retrievePendingPaymentResponse: RetrievePendingPaymentsResponse) {
         let jsonString = Mapper().toJSONString(retrievePendingPaymentResponse, prettyPrint: false)
         compare(jsonString)
     }
     
-    override func onDeviceError(_ deviceError: CloverDeviceErrorEvent) {
+    override func onDeviceError(deviceError: CloverDeviceErrorEvent) {
         self.testCase.done((false, "Device Error"))
     }
 
     
-    private func storePaymentResponse(_ response:PaymentResponse) {
+    private func storePaymentResponse(response:PaymentResponse) {
         if store?[JSON_KEYS.PAYMENT] != nil,
             let key = store?[JSON_KEYS.PAYMENT].string,
             let payment = response.payment {
@@ -550,7 +550,7 @@ class Case {
         self.cloverConnector = ((UIApplication.sharedApplication().delegate as? AppDelegate)?.cloverConnector)!
     }
     
-    func resolveVaultedCard(_ payload:JSON) -> CLVModels.Payments.VaultedCard? {
+    func resolveVaultedCard(payload:JSON) -> CLVModels.Payments.VaultedCard? {
         var vaultedCard:CLVModels.Payments.VaultedCard?
         
         if payload[JSON_KEYS.VAULTED_CARD].dictionary != nil {
@@ -569,7 +569,7 @@ class Case {
         return vaultedCard
     }
     
-    func resolvePrimitive(_ key:String?) -> Any?
+    func resolvePrimitive(key:String?) -> Any?
     {
         if let key = key {
             if key.substringToIndex(key.startIndex.advancedBy(1)) == "$" &&
@@ -581,7 +581,7 @@ class Case {
         return key
     }
     
-    public func done(_ withResult: (Bool, String?)) {
+    public func done(withResult: (Bool, String?)) {
         passed = withResult
         if let ccl = cloverConnectorListener {
             self.cloverConnector.removeCloverConnectorListener(ccl)

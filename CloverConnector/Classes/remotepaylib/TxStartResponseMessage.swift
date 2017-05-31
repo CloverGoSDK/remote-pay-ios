@@ -15,7 +15,7 @@ public class TxStartResponseMessage : Message {
     public var result:TxStartResponseResult?
     public var externalId:String?
     
-    public required init?(_ map:Map) {
+    public required init?(map:Map) {
         super.init(method: Method.TX_START_RESPONSE)
     }
     

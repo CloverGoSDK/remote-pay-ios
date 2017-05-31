@@ -18,7 +18,7 @@ public class SignatureVerifiedMessage : Message {
     public required init() {
         super.init(method: .SIGNATURE_VERIFIED)
     }
-    required public init?(_ map: Map) {
+    required public init?(map: Map) {
         super.init(method: .SIGNATURE_VERIFIED)
     }
     public init(payment:CLVModels.Payments.Payment, verified:Bool) {

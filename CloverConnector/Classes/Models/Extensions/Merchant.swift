@@ -77,7 +77,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         paymentProcessorName <- map["paymentProcessorName"]
@@ -128,7 +128,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         logoType <- map["logoType"]
@@ -266,7 +266,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         id <- map["id"]
@@ -337,7 +337,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         id <- map["id"]
@@ -527,7 +527,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         defaultCurrency <- map["defaultCurrency"]
@@ -604,7 +604,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         id <- map["id"]
@@ -652,7 +652,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         authority <- map["authority"]
@@ -688,7 +688,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         id <- map["id"]

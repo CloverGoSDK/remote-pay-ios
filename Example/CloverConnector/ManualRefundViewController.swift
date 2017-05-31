@@ -44,7 +44,7 @@ class ManualRefundViewController:UIViewController, UITableViewDelegate, UITableV
     }
     
     
-    @IBAction func onManualRefund(_ sender: UIButton) {
+    @IBAction func onManualRefund(sender: UIButton) {
         manualRefundsTable.becomeFirstResponder()
         
         if let amtText = refundAmount.text, let amt:Int = Int(amtText) {
@@ -69,7 +69,7 @@ class ManualRefundViewController:UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    private func getKeyboardHeight(_ notification: NSNotification) -> CGFloat {
+    private func getKeyboardHeight(notification: NSNotification) -> CGFloat {
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame:NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.CGRectValue()
@@ -102,11 +102,11 @@ class ManualRefundViewController:UIViewController, UITableViewDelegate, UITableV
 
 extension ManualRefundViewController : POSStoreListener {
     // POSStoreListener
-    func newOrderCreated(_ order:POSOrder){}
-    func preAuthAdded(_ payment:POSPayment){}
-    func preAuthRemoved(_ payment:POSPayment){}
-    func vaultCardAdded(_ card:POSCard){}
-    func manualRefundAdded(_ credit:POSNakedRefund){
+    func newOrderCreated(order:POSOrder){}
+    func preAuthAdded(payment:POSPayment){}
+    func preAuthRemoved(payment:POSPayment){}
+    func vaultCardAdded(card:POSCard){}
+    func manualRefundAdded(credit:POSNakedRefund){
         dispatch_async(dispatch_get_main_queue()) {
             dispatch_after(2, dispatch_get_main_queue(), {
                 self.manualRefundsTable.reloadData()

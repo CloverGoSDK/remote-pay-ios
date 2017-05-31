@@ -29,7 +29,7 @@ class OrdersTableViewController : UITableViewController, POSStoreListener {
         return 0
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier( "OrderTableCell") as! OrdersTableViewCell
         if let store = getStore() {
             
@@ -47,16 +47,16 @@ class OrdersTableViewController : UITableViewController, POSStoreListener {
     }
 
     
-    func newOrderCreated(_ order: POSOrder) {
+    func newOrderCreated(order: POSOrder) {
         ordersTable.reloadData()
     }
-    func preAuthAdded(_ payment:POSPayment) {
+    func preAuthAdded(payment:POSPayment) {
         
     }
-    func preAuthRemoved(_ payment:POSPayment) {
+    func preAuthRemoved(payment:POSPayment) {
         
     }
-    func vaultCardAdded(_ card:POSCard) {
+    func vaultCardAdded(card:POSCard) {
         
     }
     func manualRefundAdded(credit: POSNakedRefund) {

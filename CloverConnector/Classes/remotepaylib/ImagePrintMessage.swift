@@ -17,7 +17,7 @@ public class ImagePrintMessage : Message {
         super.init(method: Method.PRINT_IMAGE)
     }
     
-    public required init?(_ map:Map) {
+    public required init?(map:Map) {
         super.init(method: Method.PRINT_IMAGE)
     }
 

@@ -15,7 +15,7 @@ public class RefundPaymentPrintMessage : Message {
     public var refund:CLVModels.Payments.Refund?
     public var order:CLVModels.Order.Order?
     
-    public required init?(_ map:Map) {
+    public required init?(map:Map) {
         super.init(method: .REFUND_PRINT_PAYMENT)
     }
     

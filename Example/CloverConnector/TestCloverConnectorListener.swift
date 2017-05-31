@@ -20,13 +20,13 @@ class TestCloverConnectorListener : DefaultCloverConnectorListener {
         super.init(cloverConnector:cloverConnector)
     }
     
-    override func onDeviceActivityStart(_ deviceEvent: CloverDeviceEvent) {
+    override func onDeviceActivityStart(deviceEvent: CloverDeviceEvent) {
         viewController?.uiStateLabel.text = deviceEvent.message
     }
     
     
     
-    override func onSaleResponse(_ response: SaleResponse) {
+    override func onSaleResponse(response: SaleResponse) {
         if response.success {
             //showMessage("Success!")
             viewController?.label.text = "Sale Success!"
@@ -41,7 +41,7 @@ class TestCloverConnectorListener : DefaultCloverConnectorListener {
         }
     }
     
-    override func onTipAdjustAuthResponse(_ tipAdjustAuthResponse: TipAdjustAuthResponse) {
+    override func onTipAdjustAuthResponse(tipAdjustAuthResponse: TipAdjustAuthResponse) {
         if tipAdjustAuthResponse.success {
             viewController?.label.text = "\(tipAdjustAuthResponse.tipAmount!) Tip Applied Successfully"
             if let lastTA = lastTARequest {
@@ -52,7 +52,7 @@ class TestCloverConnectorListener : DefaultCloverConnectorListener {
         }
     }
     
-    override func onAuthResponse(_ authResponse: AuthResponse) {
+    override func onAuthResponse(authResponse: AuthResponse) {
         if authResponse.success {
             viewController?.label.text = "Auth Success!"
             if let orderId = authResponse.payment?.order?.id,
@@ -65,7 +65,7 @@ class TestCloverConnectorListener : DefaultCloverConnectorListener {
         }
     }
     
-    override func onPreAuthResponse(_ preAuthResponse: PreAuthResponse) {
+    override func onPreAuthResponse(preAuthResponse: PreAuthResponse) {
         if preAuthResponse.success {
             viewController?.label.text = "PreAuth Success!"
             lastPAResponse = preAuthResponse // so we can do tip, refund and void after capture..
@@ -85,7 +85,7 @@ class TestCloverConnectorListener : DefaultCloverConnectorListener {
         }
     }
     
-    override func onRefundPaymentResponse(_ response: RefundPaymentResponse) {
+    override func onRefundPaymentResponse(response: RefundPaymentResponse) {
         if response.success {
             viewController?.label.text = "Refund successful!"
             showMessage("Refund successful")
@@ -95,7 +95,7 @@ class TestCloverConnectorListener : DefaultCloverConnectorListener {
         }
     }
     
-    override func onCapturePreAuthResponse(_ capturePreAuthResponse: CapturePreAuthResponse) {
+    override func onCapturePreAuthResponse(capturePreAuthResponse: CapturePreAuthResponse) {
         if capturePreAuthResponse.success {
             viewController?.label.text = "PreAuth Captured!"
             if let orderId = lastPAResponse?.payment?.order?.id,
@@ -109,7 +109,7 @@ class TestCloverConnectorListener : DefaultCloverConnectorListener {
         }
     }
     
-    override func onConfirmPaymentRequest(_ request: ConfirmPaymentRequest) {
+    override func onConfirmPaymentRequest(request: ConfirmPaymentRequest) {
         if let payment = request.payment {
             let lastChallenge = request.challenges!.last!
             for var challenge in request.challenges! {
@@ -135,7 +135,7 @@ class TestCloverConnectorListener : DefaultCloverConnectorListener {
         
     }
     
-    override func onVoidPaymentResponse(_ voidPaymentResponse: VoidPaymentResponse) {
+    override func onVoidPaymentResponse(voidPaymentResponse: VoidPaymentResponse) {
         if voidPaymentResponse.success {
             viewController?.label.text = "Success: Payment Voided!"
         } else {
@@ -143,23 +143,23 @@ class TestCloverConnectorListener : DefaultCloverConnectorListener {
         }
     }
     
-    override func onVerifySignatureRequest(_ signatureVerifyRequest: VerifySignatureRequest) {
+    override func onVerifySignatureRequest(signatureVerifyRequest: VerifySignatureRequest) {
         viewController?.label.text = "Auto-Accepting Signature"
         
         cloverConnector?.acceptSignature(signatureVerifyRequest)
     }
     
-    override func onRetrievePendingPaymentsResponse(_ retrievePendingPaymentResponse: RetrievePendingPaymentsResponse) {
+    override func onRetrievePendingPaymentsResponse(retrievePendingPaymentResponse: RetrievePendingPaymentsResponse) {
         showMessage(retrievePendingPaymentResponse.success ? "\(retrievePendingPaymentResponse.pendingPayments?.count) Pending" : "Failed to get list")
     }
     
-    private func showMessage(_ message:String?) {
+    private func showMessage(message:String?) {
         let alertView:UIAlertView = UIAlertView(title: nil, message: message, delegate: nil, cancelButtonTitle: nil)
         alertView.show()
         performSelector(#selector(dismissMessage), withObject: alertView, afterDelay: 3)
     }
     
-    @objc private func dismissMessage(_ view:UIAlertView) {
+    @objc private func dismissMessage(view:UIAlertView) {
         view.dismissWithClickedButtonIndex(-1, animated: true);
     }
     
@@ -227,7 +227,7 @@ class AlertViewHandler: NSObject, UIAlertViewDelegate {
         self.onClick?(buttonIndex: buttonIndex)
     }
     
-    func alertView(_ alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
+    func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) {
         self.onClick?(buttonIndex: buttonIndex)
     }
 }

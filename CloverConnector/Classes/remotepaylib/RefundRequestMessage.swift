@@ -22,7 +22,7 @@ public class RefundRequestMessage : Message {
         self.amount = amount
         self.fullRefund = fullRefund
     }
-    public required init?(_ map:Map) {
+    public required init?(map:Map) {
         super.init(method: .REFUND_REQUEST)
     }
     

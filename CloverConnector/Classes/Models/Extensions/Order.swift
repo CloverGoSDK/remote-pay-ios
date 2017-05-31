@@ -59,7 +59,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         id <- map["id"]
@@ -98,7 +98,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         id <- map["id"]
@@ -212,7 +212,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         id <- map["id"]
@@ -277,7 +277,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         id <- map["id"]
@@ -399,7 +399,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         id <- map["id"]
@@ -456,7 +456,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         id <- map["id"]
@@ -551,7 +551,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         id <- map["id"]
@@ -595,7 +595,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         orderType <- map["orderType"]
@@ -646,7 +646,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ map:Map) {}
+      required public init?(map:Map) {}
       
       public func mapping(map:Map) {
         id <- map["id"]

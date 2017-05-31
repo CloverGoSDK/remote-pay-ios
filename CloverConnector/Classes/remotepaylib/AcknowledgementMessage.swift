@@ -13,7 +13,7 @@ public class AcknowledgementMessage : Message {
     
     public var sourceMessageId:String?
     
-    public required init?(_ map: Map) {
+    public required init?(map: Map) {
         super.init(method: .ACK)
     }
     

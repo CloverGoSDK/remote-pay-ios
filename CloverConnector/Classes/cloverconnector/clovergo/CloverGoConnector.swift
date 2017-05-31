@@ -74,11 +74,11 @@ public class CloverGoConnector : NSObject, ICloverGoConnector, CardReaderDelegat
         cloverGo.cancelCardReaderTransaction(ReaderInfo(readerType: config.deviceType, serialNumber: nil))
     }
     
-    public func addCloverConnectorListener(_ cloverConnectorListener:ICloverConnectorListener) -> Void {
+    public func addCloverConnectorListener(cloverConnectorListener:ICloverConnectorListener) -> Void {
         //Not to be implemented
     }
     
-    public func removeCloverConnectorListener(_ cloverConnectorListener:ICloverConnectorListener) -> Void {
+    public func removeCloverConnectorListener(cloverConnectorListener:ICloverConnectorListener) -> Void {
         //Not to be implemented
     }
     
@@ -325,7 +325,7 @@ public class CloverGoConnector : NSObject, ICloverGoConnector, CardReaderDelegat
         debugPrint("Not supported with CloverGo Connector")
     }
     
-    public func printImageFromURL(_ url:String) -> Void {
+    public func printImageFromURL(url:String) -> Void {
         debugPrint("Not supported with CloverGo Connector")
     }
     
@@ -333,7 +333,7 @@ public class CloverGoConnector : NSObject, ICloverGoConnector, CardReaderDelegat
     /*
      * Request that the cash drawer connected to the device be opened.
      */
-    public func  openCashDrawer (_ reason: String) -> Void {
+    public func  openCashDrawer (reason: String) -> Void {
         debugPrint("Not supported with CloverGo Connector")
     }
     

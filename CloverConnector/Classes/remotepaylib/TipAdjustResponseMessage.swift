@@ -16,7 +16,7 @@ public class TipAdjustResponseMessage : Message {
     public var amount:Int?
     public var success:Bool?
     
-    public required init?(_ map:Map) {
+    public required init?(map:Map) {
         super.init(method: Method.TIP_ADJUST_RESPONSE)
     }
     

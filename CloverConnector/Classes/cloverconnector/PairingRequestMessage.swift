@@ -23,7 +23,7 @@ public class PairingRequestMessage : Mappable {
         self.payload = Mapper().toJSONString(request, prettyPrint: true)
     }
     
-    public required init?(_ map: Map) {
+    public required init?(map: Map) {
         
     }
     

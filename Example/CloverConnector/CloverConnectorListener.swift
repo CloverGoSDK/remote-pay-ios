@@ -33,11 +33,11 @@ public class CloverConnectorListener : NSObject, ICloverConnectorListener, UIAle
         return nil
     }
     
-    @objc private func dismissMessage(_ view:UIAlertView) {
+    @objc private func dismissMessage(view:UIAlertView) {
         view.dismissWithClickedButtonIndex( -1, animated: true);
     }
     
-    private func showMessage(_ message:String, duration:Int = 3) {
+    private func showMessage(message:String, duration:Int = 3) {
 
         dispatch_async(dispatch_get_main_queue()){
             let alertView:UIAlertView = UIAlertView(title: nil, message: message, delegate: nil, cancelButtonTitle: nil)
@@ -90,7 +90,7 @@ public class CloverConnectorListener : NSObject, ICloverConnectorListener, UIAle
     /*
      * Response to an auth request
      */
-    public func onAuthResponse(_ authResponse: AuthResponse) {
+    public func onAuthResponse(authResponse: AuthResponse) {
         if authResponse.success {
             if let store = getStore() {
                 if let payment = authResponse.payment,
@@ -130,7 +130,7 @@ public class CloverConnectorListener : NSObject, ICloverConnectorListener, UIAle
     /*
      * response to a pre-auth request
      */
-    public func onPreAuthResponse(_ preAuthResponse: PreAuthResponse) {
+    public func onPreAuthResponse(preAuthResponse: PreAuthResponse) {
         if preAuthResponse.success {
             if let store = getStore() {
                 if let payment = preAuthResponse.payment {
@@ -350,7 +350,7 @@ public class CloverConnectorListener : NSObject, ICloverConnectorListener, UIAle
     /*
      * called when the device is ready to communicate
      */
-    public func  onReady (_ merchantInfo: MerchantInfo) -> Void {}
+    public func  onReady (merchantInfo: MerchantInfo) -> Void {}
     
     
     /*
@@ -358,7 +358,7 @@ public class CloverConnectorListener : NSObject, ICloverConnectorListener, UIAle
      */
     public func  onDisconnected () -> Void {}
     
-    public func onDeviceActivityEnd(_ deviceEvent: CloverDeviceEvent) {
+    public func onDeviceActivityEnd(deviceEvent: CloverDeviceEvent) {
         if let uiView = uiView {
             if self.lastDeviceEvent?.eventState == deviceEvent.eventState { // this check is because the events aren't guaranteed to be in order. could be START(A), START(B), END(A), END(B)
                 dispatch_async(dispatch_get_main_queue()){
@@ -372,7 +372,7 @@ public class CloverConnectorListener : NSObject, ICloverConnectorListener, UIAle
         }
     }
     
-    public func onDeviceActivityStart(_ deviceEvent: CloverDeviceEvent) {
+    public func onDeviceActivityStart(deviceEvent: CloverDeviceEvent) {
         if let previousUIView = self.uiView {
             dispatch_async(dispatch_get_main_queue()){
                 previousUIView.dismissWithClickedButtonIndex( 0, animated:false)
@@ -399,14 +399,14 @@ public class CloverConnectorListener : NSObject, ICloverConnectorListener, UIAle
         }
     }
     
-    public func onDeviceError(_ deviceErrorEvent: CloverDeviceErrorEvent) {
+    public func onDeviceError(deviceErrorEvent: CloverDeviceErrorEvent) {
         dispatch_async(dispatch_get_main_queue()){
             UIAlertView(title:deviceErrorEvent.errorType.rawValue, message: deviceErrorEvent.message, delegate: self, cancelButtonTitle: "Cancel")
             self.uiView!.show()
         }
     }
 
-    public func alertView(_ alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+    public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
 
         if let lastDeviceEvent = lastDeviceEvent,
             let inputOptions = lastDeviceEvent.inputOptions {
@@ -430,11 +430,11 @@ public class CloverConnectorListener : NSObject, ICloverConnectorListener, UIAle
         ready = false
     }
     
-    public func onTipAdded(_ message: TipAddedMessage) {
+    public func onTipAdded(message: TipAddedMessage) {
         
     }
     
-    public func onDeviceReady(_ merchantInfo: MerchantInfo) {
+    public func onDeviceReady(merchantInfo: MerchantInfo) {
         if !ready {
             showMessage("Ready", duration: 1)
             dispatch_async(dispatch_get_main_queue()){
@@ -447,7 +447,7 @@ public class CloverConnectorListener : NSObject, ICloverConnectorListener, UIAle
     }
     
     
-    public func onConfirmPaymentRequest(_ request: ConfirmPaymentRequest) {
+    public func onConfirmPaymentRequest(request: ConfirmPaymentRequest) {
         if let payment = request.payment {
             let lastChallenge = request.challenges!.last!
             for var challenge in request.challenges! {
@@ -473,35 +473,35 @@ public class CloverConnectorListener : NSObject, ICloverConnectorListener, UIAle
         
     }
     
-    public func onRefundPaymentResponse(_ refundPaymentResponse: RefundPaymentResponse) {
+    public func onRefundPaymentResponse(refundPaymentResponse: RefundPaymentResponse) {
         
     }
     
-    public func onPrintPaymentReceipt(_ printPaymentReceiptMessage: PrintPaymentReceiptMessage) {
+    public func onPrintPaymentReceipt(printPaymentReceiptMessage: PrintPaymentReceiptMessage) {
         
     }
     
-    public func onPrintRefundPaymentReceipt(_ printRefundPaymentReceiptMessage: PrintRefundPaymentReceiptMessage) {
+    public func onPrintRefundPaymentReceipt(printRefundPaymentReceiptMessage: PrintRefundPaymentReceiptMessage) {
         
     }
     
-    public func onPrintPaymentDeclineReceipt(_ printPaymentDeclineReceiptMessage: PrintPaymentDeclineReceiptMessage) {
+    public func onPrintPaymentDeclineReceipt(printPaymentDeclineReceiptMessage: PrintPaymentDeclineReceiptMessage) {
         
     }
     
-    public func onPrintPaymentMerchantCopyReceipt(_ printPaymentMerchantCopyReceiptMessage: PrintPaymentMerchantCopyReceiptMessage) {
+    public func onPrintPaymentMerchantCopyReceipt(printPaymentMerchantCopyReceiptMessage: PrintPaymentMerchantCopyReceiptMessage) {
         
     }
     
-    public func onPrintManualRefundReceipt(_ printManualRefundReceiptMessage: PrintManualRefundReceiptMessage) {
+    public func onPrintManualRefundReceipt(printManualRefundReceiptMessage: PrintManualRefundReceiptMessage) {
         
     }
     
-    public func onPrintManualRefundDeclineReceipt(_ printManualRefundDeclineReceiptMessage: PrintManualRefundDeclineReceiptMessage) {
+    public func onPrintManualRefundDeclineReceipt(printManualRefundDeclineReceiptMessage: PrintManualRefundDeclineReceiptMessage) {
         
     }
 
-    public func onRetrievePendingPaymentsResponse(_ retrievePendingPaymentResponse: RetrievePendingPaymentsResponse) {
+    public func onRetrievePendingPaymentsResponse(retrievePendingPaymentResponse: RetrievePendingPaymentsResponse) {
         if retrievePendingPaymentResponse.success {
             showMessage("Found \(retrievePendingPaymentResponse.pendingPayments?.count ?? -1) pending payment\(retrievePendingPaymentResponse.pendingPayments?.count != 1 ? "s" : "")")
         } else {
@@ -509,7 +509,7 @@ public class CloverConnectorListener : NSObject, ICloverConnectorListener, UIAle
         }
     }
     
-    public func onReadCardDataResponse(_ readCardDataResponse: ReadCardDataResponse) {
+    public func onReadCardDataResponse(readCardDataResponse: ReadCardDataResponse) {
         if readCardDataResponse.success {
             showMessage("\(readCardDataResponse.cardData?.first6 ?? "______")xxxxxx\(readCardDataResponse.cardData?.last4 ?? "____")")
         } else {
@@ -518,7 +518,7 @@ public class CloverConnectorListener : NSObject, ICloverConnectorListener, UIAle
         cloverConnector?.showWelcomeScreen()
     }
     
-    public func onPairingCode(_ pairingCode:String) {
+    public func onPairingCode(pairingCode:String) {
         dispatch_async(dispatch_get_main_queue()){
             if let previousUIView = self.uiView {
                 previousUIView.dismissWithClickedButtonIndex(0, animated:false)
@@ -528,7 +528,7 @@ public class CloverConnectorListener : NSObject, ICloverConnectorListener, UIAle
         }
     }
     
-    public func onPairingSuccess(_ pairingAuthToken:String) {
+    public func onPairingSuccess(pairingAuthToken:String) {
         if let previousUIView = self.uiView {
             dispatch_async(dispatch_get_main_queue()){
                 previousUIView.dismissWithClickedButtonIndex(-1, animated:false)
@@ -550,7 +550,7 @@ public class CloverConnectorListener : NSObject, ICloverConnectorListener, UIAle
             self.challenge = challenge
         }
         
-        public func alertView(_ alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        public func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
             if(buttonIndex == 1) // reject
             {
                 cloverConnector.rejectPayment(payment, challenge: challenge)

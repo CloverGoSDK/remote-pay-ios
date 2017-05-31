@@ -12,7 +12,7 @@ import ObjectMapper
 
 public class CreditPrintMessage:Message {
     public var credit:CLVModels.Payments.Credit?
-    public required init?(_ map:Map) {
+    public required init?(map:Map) {
         super.init(method: .PRINT_CREDIT)
     }
     

@@ -18,11 +18,11 @@ class TabBarController : UITabBarController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(animated: Bool) {
 
         
     }
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewDidDisappear(animated: Bool) {
 
     
     }
@@ -52,7 +52,7 @@ class TabBarController : UITabBarController {
             }
         }
         
-        override func onConfirmPaymentRequest(_ request: ConfirmPaymentRequest) {
+        override func onConfirmPaymentRequest(request: ConfirmPaymentRequest) {
             // override and do nothing in this instance
         }
         

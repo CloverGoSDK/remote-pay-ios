@@ -42,7 +42,7 @@ public class PreAuthViewController:UIViewController, UITableViewDelegate, UITabl
         getStore()?.removeStoreListener(self)
     }
     
-    @IBAction func onAmountChanged(_ sender: UITextField) {
+    @IBAction func onAmountChanged(sender: UITextField) {
         
     }
     
@@ -64,7 +64,7 @@ public class PreAuthViewController:UIViewController, UITableViewDelegate, UITabl
         return cell!
     }
     
-    @IBAction func onPreAuth(_ sender: UIButton) {
+    @IBAction func onPreAuth(sender: UIButton) {
         
         tableView.becomeFirstResponder()
         if let amtText = preAuthAmount.text, let amt:Int = Int(amtText) {
@@ -87,7 +87,7 @@ public class PreAuthViewController:UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-    private func getKeyboardHeight(_ notification: NSNotification) -> CGFloat {
+    private func getKeyboardHeight(notification: NSNotification) -> CGFloat {
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame:NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.CGRectValue()
@@ -99,16 +99,16 @@ public class PreAuthViewController:UIViewController, UITableViewDelegate, UITabl
 
 extension PreAuthViewController : POSStoreListener {
     // POSStoreListener
-    public func newOrderCreated(_ order:POSOrder){}
-    public func preAuthAdded(_ payment:POSPayment){
+    public func newOrderCreated(order:POSOrder){}
+    public func preAuthAdded(payment:POSPayment){
         dispatch_async(dispatch_get_main_queue()) {
             dispatch_after(2, dispatch_get_main_queue(), {
                 self.tableView.reloadData()
             })
         }
     }
-    public func preAuthRemoved(_ payment:POSPayment){}
-    public func vaultCardAdded(_ card:POSCard){}
-    public func manualRefundAdded(_ credit:POSNakedRefund){}
+    public func preAuthRemoved(payment:POSPayment){}
+    public func vaultCardAdded(card:POSCard){}
+    public func manualRefundAdded(credit:POSNakedRefund){}
     // End POSStoreListener
 }

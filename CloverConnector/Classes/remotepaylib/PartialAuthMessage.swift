@@ -12,7 +12,7 @@ import ObjectMapper
 public class PartialAuthMessage : Message {
     public var partialAuthAmount:Int?
     
-    public required init?(_ map:Map) {
+    public required init?(map:Map) {
         super.init(method: Method.PARTIAL_AUTH)
     }
     
