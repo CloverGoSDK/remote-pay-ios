@@ -18,7 +18,7 @@ public class ShowWelcomeScreenMessage:Message {
         super.init(method: .SHOW_WELCOME_SCREEN)
     }
     
-    required public init?(map: Map){
+    required public init?(_ map: Map){
         super.init(method: .SHOW_WELCOME_SCREEN)
     }
     

@@ -18,7 +18,7 @@ public class RefundResponseMessage : Message {
     public var message:String?
     public var code:TxState?
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         super.init(method: Method.REFUND_RESPONSE)
     }
     

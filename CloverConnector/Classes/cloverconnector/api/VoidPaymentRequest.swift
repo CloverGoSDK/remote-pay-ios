@@ -27,7 +27,7 @@ public class VoidPaymentRequest:NSObject, Mappable {
         super.init()
   }
     
-    public required init?(map: Map) {
+    public required init?(_ map: Map) {
         voidReason = .USER_CANCEL
         super.init()
     }

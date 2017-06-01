@@ -12,7 +12,7 @@ import ObjectMapper
 public class RemoveDiscountAction : Mappable {
     public var discount:DisplayDiscount?
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         
     }
     

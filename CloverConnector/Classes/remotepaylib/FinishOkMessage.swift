@@ -15,7 +15,7 @@ public class FinishOkMessage : Message {
     public var refund:CLVModels.Payments.Refund?
     public var signature:Signature?
     
-    required public init?(map: Map) {
+    required public init?(_ map: Map) {
         super.init(method: .FINISH_OK)
     }
     

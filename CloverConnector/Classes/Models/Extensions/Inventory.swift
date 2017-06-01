@@ -713,7 +713,7 @@ extension CLVModels {
       
       // Mappable
       
-      required public init?(_ _ map:Map) {}
+      required public init?(_ map:Map) {}
       
       public func mapping(map:Map) {
         taxRate <- map["taxRate"]

@@ -29,8 +29,8 @@ public class AuthRequest:TransactionRequest {
         super.init(amount:amount, externalId:externalId);
     }
     
-    public required init?(map: Map) {
-        super.init(map: map)
+    public required init?(_ map: Map) {
+        super.init(map)
     }
     
     public override func mapping(map: Map) {

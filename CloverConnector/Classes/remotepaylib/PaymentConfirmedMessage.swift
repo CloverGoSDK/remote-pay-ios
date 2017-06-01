@@ -17,7 +17,7 @@ public class PaymentConfirmedMessage : Message
     public init() {
         super.init(method: .PAYMENT_CONFIRMED)
     }
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         super.init(method: Method.PAYMENT_CONFIRMED)
     }
     
@@ -36,7 +36,7 @@ public class PaymentRejectedMessage : Message
         super.init(method: .PAYMENT_REJECTED)
     }
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         super.init(method: Method.PAYMENT_REJECTED)
     }
     

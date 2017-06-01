@@ -26,7 +26,7 @@ public class OrderUpdateMessage : Message {
         self.operation = operation
     }
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         super.init(method: .SHOW_ORDER_SCREEN)
         
     }

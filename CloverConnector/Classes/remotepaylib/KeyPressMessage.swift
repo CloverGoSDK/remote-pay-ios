@@ -48,7 +48,7 @@ public class KeyPressMessage : Message {
         self.keyPress = keyPress.rawValue as String
     }
     
-    required public init?(map: Map) {
+    required public init?(_ map: Map) {
         super.init(method: .KEY_PRESS)
         
     }

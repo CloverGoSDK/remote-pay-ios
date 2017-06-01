@@ -1995,7 +1995,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Zre-1G-HUf">
             <objects>
-                <tabBarController id="yUw-VJ-HLg" customClass="TabBarController" customModule="CloverConnector_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabControllerID" id="yUw-VJ-HLg" customClass="TabBarController" customModule="CloverConnector_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="TRe-X0-Pzj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

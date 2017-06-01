@@ -19,7 +19,7 @@ public class Point:Mappable {
 
   }
 
-  required public init?(map: Map) {
+  required public init?(_ map: Map) {
     //
   }
 

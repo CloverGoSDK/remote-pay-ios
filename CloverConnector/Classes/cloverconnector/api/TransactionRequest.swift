@@ -36,7 +36,7 @@ public class TransactionRequest : NSObject, Mappable {
     
     
     /// This function can be used to validate JSON prior to mapping. Return nil to cancel mapping at this point
-    public required init?(map: Map) {
+    public required init?(_ map: Map) {
         self.externalId=""
         super.init()
     }

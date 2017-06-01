@@ -13,7 +13,7 @@ public class CashbackSelectedMessage : Message {
     
     public var cashbackAmount:Int?
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         super.init(method: Method.CASHBACK_SELECTED)
     }
     

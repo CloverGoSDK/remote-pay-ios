@@ -16,7 +16,7 @@ public class PairingCodeMessage:Mappable {
         self.pairingCode = pairingCode;
     }
     
-    public required init?(map: Map) {
+    public required init?(_ map: Map) {
         
     }
     

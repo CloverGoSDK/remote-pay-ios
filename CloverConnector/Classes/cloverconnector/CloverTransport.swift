@@ -23,7 +23,7 @@ public class CloverTransport : NSObject {
         }
     }
     
-    func onDeviceReady(drm:DiscoveryResponseMessage) {
+    func onDeviceReady(_ drm:DiscoveryResponseMessage) {
         ready = true
         for obs in observers {
             (obs as! CloverTransportObserver).onDeviceReady(self)
@@ -41,13 +41,13 @@ public class CloverTransport : NSObject {
     /// Should be called by subclasses when a message is received.
     /// </summary>
     /// <param name="message"></param>
-    func onMessage(message:String) {
+    func onMessage(_ message:String) {
         for obs in observers {
             (obs as! CloverTransportObserver).onMessage(message)
         }
     }
     
-    func subscribe(observer:CloverTransportObserver) {
+    func subscribe(_ observer:CloverTransportObserver) {
         // to notify if the device has already reported as ready
         if (ready) {
             for obs in observers {
@@ -61,12 +61,12 @@ public class CloverTransport : NSObject {
         observers.removeAllObjects()
     }
     
-    func unsubscribe(observer:CloverTransportObserver) {
+    func unsubscribe(_ observer:CloverTransportObserver) {
         observers.removeObject(observer)
     }
     
     // Implement this to send info
-    func sendMessage(message:String) -> Int {
+    func sendMessage(_ message:String) -> Int {
         return 0;
     }
 }

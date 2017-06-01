@@ -41,7 +41,7 @@ public class ListWrapper<T:Mappable> : Mappable {
         
     }
     
-    public required init?(map: Map) {
+    public required init?(_ map: Map) {
         
     }
     
@@ -49,17 +49,17 @@ public class ListWrapper<T:Mappable> : Mappable {
         elements <- map["elements"]
     }
     
-    public func addElement(obj:T) {
+    public func addElement(_ obj:T) {
         elements.append(obj)
         //elements.addObject(obj)
     }
     
-    public func removeElement(obj:T) {
+    public func removeElement(_ obj:T) {
         //var idx = elements.indexOf({obj == $0})
         //elements.removeObject(obj);
     }
     
-    public func getElement(index:Int) -> T {
+    public func getElement(_ index:Int) -> T {
         return elements[index]
     }
     
@@ -94,11 +94,11 @@ public class StringListWrapper {
         }
     }
     
-    public func addElement(obj:String) {
+    public func addElement(_ obj:String) {
         elements.addObject(obj)
     }
     
-    public func removeElement(obj:String) {
+    public func removeElement(_ obj:String) {
         elements.removeObject(obj);
     }
     

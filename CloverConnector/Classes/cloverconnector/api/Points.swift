@@ -19,7 +19,7 @@ public class Points:Mappable {
 
   }
 
-  required public init?(map: Map) {
+  required public init?(_ map: Map) {
   }
 
   public func mapping(map:Map) {

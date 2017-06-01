@@ -12,7 +12,7 @@ import ObjectMapper
 public class OrderActionAddDiscountMessage : Message {
     public var addDiscountAction:AddDiscountAction?
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         super.init(method: .ORDER_ACTION_ADD_DISCOUNT)
     }
     

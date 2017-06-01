@@ -50,7 +50,7 @@ class WebSocketCloverTransport: CloverTransport {
 
     }
     
-    func initialize(endpoint:NSURL) {
+    func initialize(_ endpoint:NSURL) {
         
         self.endpoint = endpoint
         if let s = socket {
@@ -218,7 +218,7 @@ class WebSocketCloverTransport: CloverTransport {
         disposed = true
     }
     
-    override func sendMessage(message: String) -> Int {
+    override func sendMessage(_ message: String) -> Int {
         Swift.print("Sending raw message: \(message)")
         if let socket = socket {
             socket.writeString(message)

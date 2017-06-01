@@ -20,7 +20,7 @@ public class DefaultCloverConnectorListener : NSObject, ICloverConnectorListener
 
     
     
-    public func onTipAdded(message: TipAddedMessage) {}
+    public func onTipAdded(_ message: TipAddedMessage) {}
     
     /*
      * Response to a sale request.
@@ -67,7 +67,7 @@ public class DefaultCloverConnectorListener : NSObject, ICloverConnectorListener
     /*
      * Response to a payment being refunded.
      */
-    public func onRefundPaymentResponse(refundPaymentResponse: RefundPaymentResponse) -> Void {}
+    public func onRefundPaymentResponse(_ refundPaymentResponse: RefundPaymentResponse) -> Void {}
     
     
     /*
@@ -118,7 +118,7 @@ public class DefaultCloverConnectorListener : NSObject, ICloverConnectorListener
     /*
      * called when the device is ready to communicate
      */
-    public func  onDeviceReady (merchantInfo: MerchantInfo) -> Void {}
+    public func  onDeviceReady (_ merchantInfo: MerchantInfo) -> Void {}
     
     
     /*
@@ -130,23 +130,23 @@ public class DefaultCloverConnectorListener : NSObject, ICloverConnectorListener
      * callbacks if disablePrinting is enabled on the request
      */
     
-    public func onPrintManualRefundReceipt(pcm:PrintManualRefundReceiptMessage){}
+    public func onPrintManualRefundReceipt(_ pcm:PrintManualRefundReceiptMessage){}
     
-    public func onPrintManualRefundDeclineReceipt(pcdrm:PrintManualRefundDeclineReceiptMessage){}
+    public func onPrintManualRefundDeclineReceipt(_ pcdrm:PrintManualRefundDeclineReceiptMessage){}
     
-    public func onPrintPaymentReceipt(pprm:PrintPaymentReceiptMessage){}
+    public func onPrintPaymentReceipt(_ pprm:PrintPaymentReceiptMessage){}
     
-    public func onPrintPaymentDeclineReceipt(ppdrm:PrintPaymentDeclineReceiptMessage){}
+    public func onPrintPaymentDeclineReceipt(_ ppdrm:PrintPaymentDeclineReceiptMessage){}
     
-    public func onPrintPaymentMerchantCopyReceipt(ppmcrm:PrintPaymentMerchantCopyReceiptMessage){}
+    public func onPrintPaymentMerchantCopyReceipt(_ ppmcrm:PrintPaymentMerchantCopyReceiptMessage){}
     
-    public func onPrintRefundPaymentReceipt(pprrm:PrintRefundPaymentReceiptMessage){}
+    public func onPrintRefundPaymentReceipt(_ pprrm:PrintRefundPaymentReceiptMessage){}
     
-    public func onRetrievePendingPaymentsResponse(retrievePendingPaymentResponse:RetrievePendingPaymentsResponse){}
+    public func onRetrievePendingPaymentsResponse(_ retrievePendingPaymentResponse:RetrievePendingPaymentsResponse){}
     
-    public func onReadCardDataResponse(readCardDataResponse: ReadCardDataResponse) {}
+    public func onReadCardDataResponse(_ readCardDataResponse: ReadCardDataResponse) {}
     
-    public func onConfirmPaymentRequest(request: ConfirmPaymentRequest) {
+    public func onConfirmPaymentRequest(_ request: ConfirmPaymentRequest) {
         fatalError("Must be implemented!")
     }
     

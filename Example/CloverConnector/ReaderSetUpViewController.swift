@@ -18,7 +18,17 @@ var cloverGoConnector350Reader : ICloverGoConnector?
 var cloverGoConnector450Reader : ICloverGoConnector?
 var cloverConnectorListener:CloverConnectorListener?
 
-class ReaderSetUpViewController: UIViewController {
+@objc protocol StartTransactionDelegate{
+    func proceedAfterReaderReady(merchantInfo: MerchantInfo)
+    func readerDisconnected()
+}
+
+var delegateStartTransaction:StartTransactionDelegate? = nil
+
+let workingQueue = dispatch_queue_create("my_queue", nil)
+
+
+class ReaderSetUpViewController: UIViewController, StartTransactionDelegate {
     
     @IBOutlet weak var buttonConnect350: UIButton!
     @IBOutlet weak var buttonConnect450: UIButton!
@@ -34,22 +44,7 @@ class ReaderSetUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if is350ReaderInitialized{
-            labelConnect350.text = "Reader 350 connected ✅"
-            buttonConnect350.setTitle("Disconnect", forState: .Normal)
-        }
-        else{
-            labelConnect350.text = "No 350 Reader connected"
-            buttonConnect350.setTitle("Connect", forState: .Normal)
-        }
-        if is450ReaderInitialized{
-            labelConnect450.text = "Reader 450 connected ✅"
-            buttonConnect450.setTitle("Disconnect", forState: .Normal)
-        }
-        else{
-            labelConnect450.text = "No 450 Reader connected"
-            buttonConnect450.setTitle("Connect", forState: .Normal)
-        }
+        checkReaderConnectedStatus()
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,12 +60,12 @@ class ReaderSetUpViewController: UIViewController {
             {
                 if(isOAuthMode)
                 {
-                    let config350Reader = CloverGoDeviceConfiguration.Builder(apiKey: apiKey!, secret: secret!, env: .test).accessToken(accessToken!).allowAutoConnect(true).allowDuplicateTransaction(true).build()
+                    let config350Reader = CloverGoDeviceConfiguration.Builder(apiKey: apiKey!, secret: secret!, env: .test).accessToken(accessToken!).allowAutoConnect(true).allowDuplicateTransaction(true).deviceType(.RP350).build()
                     cloverGoConnector350Reader = CloverGoConnector(config: config350Reader)
                 }
                 else
                 {
-                    let config350Reader : CloverGoDeviceConfiguration = CloverGoDeviceConfiguration.Builder(apiKey: apiKey!, secret: secret!, env: .test).accessToken(accessToken!).allowAutoConnect(true).allowDuplicateTransaction(true).build()
+                    let config350Reader : CloverGoDeviceConfiguration = CloverGoDeviceConfiguration.Builder(apiKey: apiKey!, secret: secret!, env: .test).accessToken(accessToken!).allowAutoConnect(true).allowDuplicateTransaction(true).deviceType(.RP350).build()
                     cloverGoConnector350Reader = CloverGoConnector(config: config350Reader)
                 }
                 
@@ -92,6 +87,7 @@ class ReaderSetUpViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
+        delegateStartTransaction = self
     }
     
     @IBAction func action_connect450Button(sender: AnyObject)
@@ -129,6 +125,7 @@ class ReaderSetUpViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
+        delegateStartTransaction = self
     }
     
     //MARK: SelectReader
@@ -140,4 +137,55 @@ class ReaderSetUpViewController: UIViewController {
         cloverGoConnector450Reader?.connectToBluetoothReader(readerInfo)
     }
     
+    //MARK: StartTransactionDelegate delegates
+    
+    func proceedAfterReaderReady(merchantInfo: MerchantInfo)
+    {
+        if merchantInfo.deviceInfo?.deviceModel == "RP350"
+        {
+            is350ReaderInitialized = true
+            checkReaderConnectedStatus()
+        }
+        if merchantInfo.deviceInfo?.deviceModel == "RP450"
+        {
+            is450ReaderInitialized = true
+            checkReaderConnectedStatus()
+        }
+        
+        dispatch_async(workingQueue) {
+            NSThread.sleepForTimeInterval(3)
+            dispatch_async(dispatch_get_main_queue()){
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                let nextViewController = storyBoard.instantiateViewControllerWithIdentifier("tabControllerID") as! TabBarController
+                self.presentViewController(nextViewController, animated:true, completion:nil)
+            }
+        }
+    }
+    
+    func readerDisconnected()
+    {
+        is350ReaderInitialized = false
+        is450ReaderInitialized = false
+        checkReaderConnectedStatus()
+    }
+    
+    func checkReaderConnectedStatus()
+    {
+        if is350ReaderInitialized{
+            labelConnect350.text = "Reader 350 connected ✅"
+            buttonConnect350.setTitle("Disconnect", forState: .Normal)
+        }
+        else{
+            labelConnect350.text = "No 350 Reader connected"
+            buttonConnect350.setTitle("Connect", forState: .Normal)
+        }
+        if is450ReaderInitialized{
+            labelConnect450.text = "Reader 450 connected ✅"
+            buttonConnect450.setTitle("Disconnect", forState: .Normal)
+        }
+        else{
+            labelConnect450.text = "No 450 Reader connected"
+            buttonConnect450.setTitle("Connect", forState: .Normal)
+        }
+    }
 }

@@ -11,7 +11,7 @@ import ObjectMapper
 
 public class FinishCancelMessage : Message {
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         super.init(method: Method.FINISH_CANCEL)
     }
 }

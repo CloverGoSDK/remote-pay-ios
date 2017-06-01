@@ -23,7 +23,7 @@ public class VaultCardRequest : NSObject, Mappable {
     super.init()
   }
 
-  required public init?(map: Map) {
+  required public init?(_ map: Map) {
   }
 
   public func mapping(map:Map) {

@@ -22,54 +22,54 @@ class CloverDevice {
         self.packageName = packageName
     }
     
-    func subscribe(observer:CloverDeviceObserver) {
+    func subscribe(_ observer:CloverDeviceObserver) {
         deviceObservers.addObject(observer)
     }
     
-    func unsubscribe(observer:CloverDeviceObserver) {
+    func unsubscribe(_ observer:CloverDeviceObserver) {
         deviceObservers.removeObject(observer)
     }
     
     func doDiscoveryRequest() {}
     
-    func doTxStart(payIntent:PayIntent, order:CLVModels.Order.Order?, suppressTipScreen:Bool) {}
+    func doTxStart(_ payIntent:PayIntent, order:CLVModels.Order.Order?, suppressTipScreen:Bool) {}
     
-    func doKeyPress(keyPress:KeyPress) {}
+    func doKeyPress(_ keyPress:KeyPress) {}
     
-    func doVoidPayment(payment:CLVModels.Payments.Payment, reason:String) {}
+    func doVoidPayment(_ payment:CLVModels.Payments.Payment, reason:String) {}
     
-    func doCaptureAuth(paymentID:String, amount:Int, tipAmount:Int) {}
+    func doCaptureAuth(_ paymentID:String, amount:Int, tipAmount:Int) {}
     
-    func doOrderUpdate(displayOrder:DisplayOrder, orderOperation operation:DisplayOrderModifiedOperation?) {}
+    func doOrderUpdate(_ displayOrder:DisplayOrder, orderOperation operation:DisplayOrderModifiedOperation?) {}
     
-    func doSignatureVerified(payment:CLVModels.Payments.Payment, verified:Bool) {}
+    func doSignatureVerified(_ payment:CLVModels.Payments.Payment, verified:Bool) {}
     
-    func doTerminalMessage(text:String) {}
+    func doTerminalMessage(_ text:String) {}
     
-    func doPaymentRefund(orderId:String, paymentId:String, amount:Int, fullRefund:Bool) {} // manual refunds are handled via doTxStart
+    func doPaymentRefund(_ orderId:String, paymentId:String, amount:Int, fullRefund:Bool) {} // manual refunds are handled via doTxStart
     
-    func doTipAdjustAuth(orderId:String, paymentId:String, amount:Int) {}
+    func doTipAdjustAuth(_ orderId:String, paymentId:String, amount:Int) {}
     
     func doBreak() {}
     
-    func doPrintText(textLines:[String]) {}
+    func doPrintText(_ textLines:[String]) {}
     
     func doShowWelcomeScreen() {}
     
-    func doShowPaymentReceiptScreen(orderId:String, paymentId:String) {}
+    func doShowPaymentReceiptScreen(_ orderId:String, paymentId:String) {}
     
     func doShowThankYouScreen() {}
     
-    func doOpenCashDrawer(reason:String) {}
+    func doOpenCashDrawer(_ reason:String) {}
     
-    //func doPrintImage(bitmap:UIImage) {}
-    func doPrintImage(url:String) {}
+    //func doPrintImage(_ bitmap:UIImage) {}
+    func doPrintImage(_ url:String) {}
     
     func dispose() {}
     
-    func doCloseout(allowOpenTabs:Bool, batchId:String?) {}
+    func doCloseout(_ allowOpenTabs:Bool, batchId:String?) {}
     
-    func doVaultCard(cardEntryMethods:Int) {}
+    func doVaultCard(_ cardEntryMethods:Int) {}
     
     func doAcceptPayment( _ payment:CLVModels.Payments.Payment) {}
     
@@ -77,6 +77,6 @@ class CloverDevice {
     
     func doRetrievePendingPayments() {}
     
-    func doReadCardData(payIntent:PayIntent) {}
+    func doReadCardData(_ payIntent:PayIntent) {}
     
 }

@@ -14,31 +14,31 @@ protocol CloverDeviceObserver:AnyObject {
     
     //    func onTxState(TxState txState)
     
-    func onUiState(uiState:UiState, uiText:String, uiDirection:UiState.UiDirection, inputOptions:[InputOption]?)
+    func onUiState(_ uiState:UiState, uiText:String, uiDirection:UiState.UiDirection, inputOptions:[InputOption]?)
     
-    func onTipAddedResponse(tipAmount:Int)
+    func onTipAddedResponse(_ tipAmount:Int)
     
-    func onAuthTipAdjustedResponse(paymentId:String, amount:Int, success:Bool)
+    func onAuthTipAdjustedResponse(_ paymentId:String, amount:Int, success:Bool)
     
-    func onCashbackSelectedResponse(cashbackAmount:Int)
+    func onCashbackSelectedResponse(_ cashbackAmount:Int)
     
-    func onPartialAuthResponse(partialAuthAmount:Int)
+    func onPartialAuthResponse(_ partialAuthAmount:Int)
     
-    func onFinishOk(payment:CLVModels.Payments.Payment, signature:Signature?)
+    func onFinishOk(_ payment:CLVModels.Payments.Payment, signature:Signature?)
     
-    func onFinishOk(credit:CLVModels.Payments.Credit)
+    func onFinishOk(_ credit:CLVModels.Payments.Credit)
     
-    func onFinishOk(redund:CLVModels.Payments.Refund)
+    func onFinishOk(_ redund:CLVModels.Payments.Refund)
     
     func onFinishCancel()
     
-    func onVerifySignature(payment:CLVModels.Payments.Payment, signature:Signature?)
+    func onVerifySignature(_ payment:CLVModels.Payments.Payment, signature:Signature?)
     
-    func onPaymentVoidedResponse(payment:CLVModels.Payments.Payment, voidReason:VoidReason)
+    func onPaymentVoidedResponse(_ payment:CLVModels.Payments.Payment, voidReason:VoidReason)
     
-    func onKeyPressed(keyPress:KeyPress)
+    func onKeyPressed(_ keyPress:KeyPress)
     
-    func onPaymentRefundResponse(orderId:String?, String paymentId:String?, refund:CLVModels.Payments.Refund?, code:TxState)
+    func onPaymentRefundResponse(_ orderId:String?, String paymentId:String?, refund:CLVModels.Payments.Refund?, code:TxState)
     
     func onVaultCardResponse( _ vaultedCard:CLVModels.Payments.VaultedCard?, code:ResultStatus?, reason:String?)
     
@@ -51,53 +51,53 @@ protocol CloverDeviceObserver:AnyObject {
     //func onModifyOrder(AddLineItemAction addLineItemAction)
     //func onModifyOrder(RemoveLineItemAction removeLineItemAction)
     
-    func onPrintRefundPayment(refund:CLVModels.Payments.Refund?, payment:CLVModels.Payments.Payment?, order:CLVModels.Order.Order?)
-    func onPrintMerchantReceipt(payment:CLVModels.Payments.Payment?)
-    func onPrintPaymentDecline(reason:String, payment:CLVModels.Payments.Payment?)
-    func onPrintPayment(order:CLVModels.Order.Order?, payment:CLVModels.Payments.Payment?)
-    func onPrintCredit(credit:CLVModels.Payments.Credit)
-    func onPrintCreditDecline(reason:String, credit:CLVModels.Payments.Credit?)
+    func onPrintRefundPayment(_ refund:CLVModels.Payments.Refund?, payment:CLVModels.Payments.Payment?, order:CLVModels.Order.Order?)
+    func onPrintMerchantReceipt(_ payment:CLVModels.Payments.Payment?)
+    func onPrintPaymentDecline(_ reason:String, payment:CLVModels.Payments.Payment?)
+    func onPrintPayment(_ order:CLVModels.Order.Order?, payment:CLVModels.Payments.Payment?)
+    func onPrintCredit(_ credit:CLVModels.Payments.Credit)
+    func onPrintCreditDecline(_ reason:String, credit:CLVModels.Payments.Credit?)
     
-    func onTxStartResponse(result:TxStartResponseResult, externalId:String)
+    func onTxStartResponse(_ result:TxStartResponseResult, externalId:String)
     
     func onDeviceDisconnected( _ device:CloverDevice)
-    func onDeviceConnected(device:CloverDevice)
-    func onDeviceReady(device:CloverDevice, discoveryResponseMessage:DiscoveryResponseMessage)
+    func onDeviceConnected(_ device:CloverDevice)
+    func onDeviceReady(_ device:CloverDevice, discoveryResponseMessage:DiscoveryResponseMessage)
     
-    func onMessageAck(sourceMessageId:String)
+    func onMessageAck(_ sourceMessageId:String)
     
-    func onPendingPaymentsResponse(success:Bool, payments:[PendingPaymentEntry]?)
+    func onPendingPaymentsResponse(_ success:Bool, payments:[PendingPaymentEntry]?)
     
     func onReadCardResponse( _ status:ResultStatus, reason:String, cardData:CardData?)
-    func onConfirmPayment(payment:CLVModels.Payments.Payment?, challenges: [Challenge]?)
+    func onConfirmPayment(_ payment:CLVModels.Payments.Payment?, challenges: [Challenge]?)
 }
 
 public class DefaultCloverDeviceObserver : CloverDeviceObserver {
-    func onUiState(uiState:UiState, uiText:String, uiDirection:UiState.UiDirection, inputOptions:[InputOption]?){}
+    func onUiState(_ uiState:UiState, uiText:String, uiDirection:UiState.UiDirection, inputOptions:[InputOption]?){}
     
-    func onTipAddedResponse(tipAmount:Int){}
+    func onTipAddedResponse(_ tipAmount:Int){}
     
-    func onAuthTipAdjustedResponse(paymentId:String, amount:Int, success:Bool){}
+    func onAuthTipAdjustedResponse(_ paymentId:String, amount:Int, success:Bool){}
     
-    func onCashbackSelectedResponse(cashbackAmount:Int){}
+    func onCashbackSelectedResponse(_ cashbackAmount:Int){}
     
-    func onPartialAuthResponse(partialAuthAmount:Int){}
+    func onPartialAuthResponse(_ partialAuthAmount:Int){}
     
-    func onFinishOk(payment:CLVModels.Payments.Payment, signature:Signature?){}
+    func onFinishOk(_ payment:CLVModels.Payments.Payment, signature:Signature?){}
     
-    func onFinishOk(credit:CLVModels.Payments.Credit){}
+    func onFinishOk(_ credit:CLVModels.Payments.Credit){}
     
-    func onFinishOk(redund:CLVModels.Payments.Refund){}
+    func onFinishOk(_ redund:CLVModels.Payments.Refund){}
     
     func onFinishCancel(){}
     
-    func onVerifySignature(payment:CLVModels.Payments.Payment, signature:Signature?){}
+    func onVerifySignature(_ payment:CLVModels.Payments.Payment, signature:Signature?){}
     
-    func onPaymentVoidedResponse(payment:CLVModels.Payments.Payment, voidReason:VoidReason){}
+    func onPaymentVoidedResponse(_ payment:CLVModels.Payments.Payment, voidReason:VoidReason){}
     
-    func onKeyPressed(keyPress:KeyPress){}
+    func onKeyPressed(_ keyPress:KeyPress){}
     
-    func onPaymentRefundResponse(orderId:String?, String paymentId:String?, refund:CLVModels.Payments.Refund?, code:TxState){}
+    func onPaymentRefundResponse(_ orderId:String?, String paymentId:String?, refund:CLVModels.Payments.Refund?, code:TxState){}
     
     func onVaultCardResponse( _ vaultedCard:CLVModels.Payments.VaultedCard?, code:ResultStatus?, reason:String?){}
     
@@ -110,24 +110,24 @@ public class DefaultCloverDeviceObserver : CloverDeviceObserver {
     //func onModifyOrder(AddLineItemAction addLineItemAction)
     //func onModifyOrder(RemoveLineItemAction removeLineItemAction)
     
-    func onPrintRefundPayment(refund:CLVModels.Payments.Refund?, payment:CLVModels.Payments.Payment?, order:CLVModels.Order.Order?){}
-    func onPrintMerchantReceipt(payment:CLVModels.Payments.Payment?){}
-    func onPrintPaymentDecline(reason:String, payment:CLVModels.Payments.Payment?){}
-    func onPrintPayment(order:CLVModels.Order.Order?, payment:CLVModels.Payments.Payment?){}
-    func onPrintCredit(credit:CLVModels.Payments.Credit){}
-    func onPrintCreditDecline(reason:String, credit:CLVModels.Payments.Credit?){}
+    func onPrintRefundPayment(_ refund:CLVModels.Payments.Refund?, payment:CLVModels.Payments.Payment?, order:CLVModels.Order.Order?){}
+    func onPrintMerchantReceipt(_ payment:CLVModels.Payments.Payment?){}
+    func onPrintPaymentDecline(_ reason:String, payment:CLVModels.Payments.Payment?){}
+    func onPrintPayment(_ order:CLVModels.Order.Order?, payment:CLVModels.Payments.Payment?){}
+    func onPrintCredit(_ credit:CLVModels.Payments.Credit){}
+    func onPrintCreditDecline(_ reason:String, credit:CLVModels.Payments.Credit?){}
     
-    func onTxStartResponse(result:TxStartResponseResult, externalId:String){}
+    func onTxStartResponse(_ result:TxStartResponseResult, externalId:String){}
     
     func onDeviceDisconnected( _ device:CloverDevice){}
-    func onDeviceConnected(device:CloverDevice){}
-    func onDeviceReady(device:CloverDevice, discoveryResponseMessage:DiscoveryResponseMessage){}
+    func onDeviceConnected(_ device:CloverDevice){}
+    func onDeviceReady(_ device:CloverDevice, discoveryResponseMessage:DiscoveryResponseMessage){}
     
-    func onMessageAck(sourceMessageId:String){}
+    func onMessageAck(_ sourceMessageId:String){}
     
-    func onPendingPaymentsResponse(success:Bool, payments:[PendingPaymentEntry]?){}
+    func onPendingPaymentsResponse(_ success:Bool, payments:[PendingPaymentEntry]?){}
     
     func onReadCardResponse( _ status:ResultStatus, reason:String, cardData:CardData?){}
-    func onConfirmPayment(payment:CLVModels.Payments.Payment?, challenges: [Challenge]?){}
+    func onConfirmPayment(_ payment:CLVModels.Payments.Payment?, challenges: [Challenge]?){}
     
 }

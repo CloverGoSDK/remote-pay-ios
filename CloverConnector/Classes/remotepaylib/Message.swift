@@ -17,7 +17,7 @@ public class Message : NSObject, Mappable {
         self.method = method
     }
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         method = Method.BREAK
     }
     

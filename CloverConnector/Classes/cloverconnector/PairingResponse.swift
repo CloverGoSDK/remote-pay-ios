@@ -21,7 +21,7 @@ public class PairingResponse : PairingRequest {
         self.millis = millis;
     }
     
-    public required init?(map: Map) {
+    public required init?(_ map: Map) {
         super.init(map)
     }
     

@@ -16,7 +16,7 @@ public class CloseoutResponseMessage : Message {
     public var reason:String?
     public var batch:CLVModels.Payments.Batch?
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         super.init(method: .CLOSEOUT_RESPONSE)
     }
     

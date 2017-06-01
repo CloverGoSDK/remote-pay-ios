@@ -17,7 +17,7 @@ public class TerminalMessage : Message {
         super.init(method: .TERMINAL_MESSAGE)
     }
     
-    required public init?(map: Map) {
+    required public init?(_ map: Map) {
         super.init(method: .TERMINAL_MESSAGE)
     }
     

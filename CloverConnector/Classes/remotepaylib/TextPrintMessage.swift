@@ -19,7 +19,7 @@ public class TextPrintMessage : Message {
         super.init(method: .PRINT_TEXT)
     }
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         super.init(method: .PRINT_TEXT)
     }
     

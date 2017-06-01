@@ -84,7 +84,7 @@ public class UiStateMessage : Message {
     public required init() {
         super.init(method: .UI_STATE)
     }
-    required public init?(map: Map) {
+    required public init?(_ map: Map) {
         super.init(method: .UI_STATE)
     }
     public override func mapping(map:Map) {

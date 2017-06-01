@@ -19,7 +19,7 @@ public class VoidPaymentMessage : Message {
         super.init(method: .VOID_PAYMENT)
     }
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         super.init(method: .VOID_PAYMENT)
     }
     

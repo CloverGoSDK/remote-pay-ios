@@ -14,7 +14,7 @@ public class TxStartRequestMessage : Message {
     public var order:CLVModels.Order.Order?
     public var suppressOnScreenTips:Bool?
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         super.init(method: .TX_START)
     }
     

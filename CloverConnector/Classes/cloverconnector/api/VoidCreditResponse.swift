@@ -25,7 +25,7 @@ public class VoidCreditResponse:Mappable {
 
   }
 
-  required public init?(map: Map) {
+  required public init?(_ map: Map) {
   }
 
   public func mapping(map:Map) {

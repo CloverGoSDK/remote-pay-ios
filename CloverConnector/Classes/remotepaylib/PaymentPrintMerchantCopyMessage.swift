@@ -13,7 +13,7 @@ import ObjectMapper
 public class PaymentPrintMerchantCopyMessage:Message {
     public var payment:CLVModels.Payments.Payment?
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         super.init(method:.PRINT_PAYMENT_MERCHANT_COPY)
     }
     

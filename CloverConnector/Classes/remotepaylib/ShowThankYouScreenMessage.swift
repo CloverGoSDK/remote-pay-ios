@@ -19,7 +19,7 @@ public class ShowThankYouScreenMessage:Message {
         super.init(method: .SHOW_THANK_YOU_SCREEN)
     }
     
-    required public init?(map: Map){
+    required public init?(_ map: Map){
         super.init(method: .SHOW_THANK_YOU_SCREEN)
     }
     

@@ -14,7 +14,7 @@ public class PaymentPrintMessage : Message {
     public var payment:CLVModels.Payments.Payment?
     public var order:CLVModels.Order.Order?
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         super.init(method: Method.PRINT_PAYMENT)
     }
     

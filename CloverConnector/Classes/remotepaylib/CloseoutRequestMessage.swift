@@ -19,7 +19,7 @@ public class CloseoutRequestMessage : Message {
         super.init(method: .CLOSEOUT_REQUEST)
     }
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         super.init(method: .CLOSEOUT_REQUEST)
     }
     

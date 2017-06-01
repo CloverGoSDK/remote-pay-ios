@@ -20,7 +20,7 @@ public class PairingResponseMessage : Mappable
     public init() {
     }
     
-    public required init?(map: Map) {
+    public required init?(_ map: Map) {
         
     }
     

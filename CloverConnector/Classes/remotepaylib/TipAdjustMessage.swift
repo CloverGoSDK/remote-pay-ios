@@ -18,7 +18,7 @@ public class TipAdjustMessage : Message {
         super.init(method: .TIP_ADJUST)
     }
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         super.init(method: .TIP_ADJUST)
     }
     

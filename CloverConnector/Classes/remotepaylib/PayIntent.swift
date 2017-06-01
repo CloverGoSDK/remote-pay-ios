@@ -51,7 +51,7 @@ public class PayIntent:Mappable {
     self.externalPaymentId = ""
   }
 
-  public required init(map:Map){
+  public required init(_ map:Map){
     self.amount = 0
     self.externalPaymentId = ""
 

@@ -12,7 +12,7 @@ import ObjectMapper
 public class OrderActionLineItemMessage : Message {
     public var addLineItemAction:AddLineItemAction?
     
-    public required init?(map:Map) {
+    public required init?(_ map:Map) {
         super.init(method: .ORDER_ACTION_ADD_LINE_ITEM)
     }
     

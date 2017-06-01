@@ -31,7 +31,7 @@ public class SaleRequest:TransactionRequest {
         super.init(amount:amount, externalId:externalId)
     }
     
-    public required init?(map: Map) {
+    public required init?(_ map: Map) {
         super.init(map)
     }
 
