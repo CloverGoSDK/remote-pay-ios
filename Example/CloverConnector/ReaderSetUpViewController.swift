@@ -19,7 +19,7 @@ var cloverGoConnector450Reader : ICloverGoConnector?
 var cloverConnectorListener:CloverConnectorListener?
 
 class ReaderSetUpViewController: UIViewController {
-
+    
     @IBOutlet weak var buttonConnect350: UIButton!
     @IBOutlet weak var buttonConnect450: UIButton!
     @IBOutlet weak var labelConnect350: UILabel!
@@ -29,11 +29,11 @@ class ReaderSetUpViewController: UIViewController {
     var apiKey: String?
     var secret: String?
     
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if is350ReaderInitialized{
             labelConnect350.text = "Reader 350 connected ✅"
             buttonConnect350.setTitle("Disconnect", forState: .Normal)
@@ -51,7 +51,7 @@ class ReaderSetUpViewController: UIViewController {
             buttonConnect450.setTitle("Connect", forState: .Normal)
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -93,7 +93,7 @@ class ReaderSetUpViewController: UIViewController {
             self.presentViewController(alert, animated: true, completion: nil)
         }
     }
-
+    
     @IBAction func action_connect450Button(sender: AnyObject)
     {
         if(!is450ReaderInitialized)
@@ -113,7 +113,7 @@ class ReaderSetUpViewController: UIViewController {
                 
                 cloverConnectorListener = CloverGoConnectorListener(cloverConnector: cloverGoConnector450Reader!)
                 (cloverGoConnector450Reader as? CloverGoConnector)?.addCloverGoConnectorListener((cloverConnectorListener as? ICloverGoConnectorListener)!)
-
+                
                 cloverGoConnector450Reader?.initializeConnection()
             }
             else
@@ -136,8 +136,8 @@ class ReaderSetUpViewController: UIViewController {
     func selectedReader(readerInfo: ReaderInfo)
     {
         dismissViewControllerAnimated(true, completion: nil)
-//        AlertLoading.show("Connecting to \nReader: \(readerInfo.bluetoothName!)")
+        //        AlertLoading.show("Connecting to \nReader: \(readerInfo.bluetoothName!)")
         cloverGoConnector450Reader?.connectToBluetoothReader(readerInfo)
     }
-
+    
 }
