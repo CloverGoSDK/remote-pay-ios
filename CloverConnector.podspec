@@ -70,5 +70,5 @@ s.frameworks = 'Foundation'
 s.dependency 'ObjectMapper', '1.5.0'
 s.dependency 'Starscream', '1.1.4'
 s.dependency 'SwiftyJSON', '2.4.0'
-s.dependency 'CloverGoSDK', '2.1.7'
+s.dependency 'CloverGoSDK', '2.1.7.5'
 end

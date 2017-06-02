@@ -272,13 +272,13 @@ public class CloverGoConnector : NSObject, ICloverGoConnector, CardReaderDelegat
         deviceReady = true
         cloverGo.getMerchantInfo({ (merchant) in
             let merchantInfo = MerchantInfo(id: merchant.id, mid: nil, name: merchant.name, deviceName: cardReaderInfo.bluetoothName, deviceSerialNumber: cardReaderInfo.serialNumber, deviceModel: cardReaderInfo.readerType.toString())
-            merchantInfo.supportsAuths = merchant.properties?[MerchantPropertyType.supportsAuths.toString()] ?? false
-            merchantInfo.supportsVaultCards = merchant.properties?[MerchantPropertyType.supportsVaultCards.toString()] ?? false
-            merchantInfo.supportsManualRefunds = merchant.properties?[MerchantPropertyType.supportsManualRefunds.toString()] ?? false
-            merchantInfo.supportsTipAdjust = merchant.properties?[MerchantPropertyType.supportsTipAdjust.toString()] ?? false
-            merchantInfo.supportsPreAuths = merchant.properties?[MerchantPropertyType.supportsPreAuths.toString()] ?? false
-            merchantInfo.supportsVoids = merchant.properties?[MerchantPropertyType.supportsVoids.toString()] ?? false
-            merchantInfo.supportsSales = merchant.properties?[MerchantPropertyType.supportsSales.toString()] ?? false
+            merchantInfo.supportsAuths = (merchant.features?.contains(MerchantPropertyType.supportsAuths.toString()) ?? false) ? true : false
+            merchantInfo.supportsVaultCards = (merchant.features?.contains(MerchantPropertyType.supportsVaultCards.toString()) ?? false) ? true : false
+            merchantInfo.supportsManualRefunds = (merchant.features?.contains(MerchantPropertyType.supportsManualRefunds.toString()) ?? false) ? true : false
+            merchantInfo.supportsTipAdjust = (merchant.features?.contains(MerchantPropertyType.supportsTipAdjust.toString()) ?? false) ? true : false
+            merchantInfo.supportsPreAuths = (merchant.features?.contains(MerchantPropertyType.supportsPreAuths.toString()) ?? false) ? true : false
+            merchantInfo.supportsVoids = (merchant.features?.contains(MerchantPropertyType.supportsVoids.toString()) ?? false) ? true : false
+            merchantInfo.supportsSales = (merchant.features?.contains(MerchantPropertyType.supportsSales.toString()) ?? false) ? true : false
             self.connectorListener?.onDeviceReady(merchantInfo)
         }) { (error) in
             //Not expecting an error for now
