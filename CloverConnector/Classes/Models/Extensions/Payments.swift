@@ -419,6 +419,9 @@ extension CLVModels {
       public var cardholderName: String?
       public var token: String?
       
+      //Added for CloverGo
+      public var cvmResult:CLVModels.Payments.CvmResult?
+      
       public func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(paymentRef, forKey: "paymentRef")
         aCoder.encodeObject(creditRef, forKey: "creditRef")

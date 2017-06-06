@@ -72,6 +72,8 @@ class ReaderSetUpViewController: UIViewController, StartTransactionDelegate {
                 cloverConnectorListener = CloverGoConnectorListener(cloverConnector: cloverGoConnector350Reader!)
                 (cloverGoConnector350Reader as? CloverGoConnector)?.addCloverGoConnectorListener((cloverConnectorListener as? ICloverGoConnectorListener)!)
                 
+                (UIApplication.sharedApplication().delegate as! AppDelegate).cloverConnector = cloverGoConnector350Reader
+                
                 cloverGoConnector350Reader?.initializeConnection()
             }
             else
@@ -109,6 +111,8 @@ class ReaderSetUpViewController: UIViewController, StartTransactionDelegate {
                 
                 cloverConnectorListener = CloverGoConnectorListener(cloverConnector: cloverGoConnector450Reader!)
                 (cloverGoConnector450Reader as? CloverGoConnector)?.addCloverGoConnectorListener((cloverConnectorListener as? ICloverGoConnectorListener)!)
+                
+                (UIApplication.sharedApplication().delegate as! AppDelegate).cloverConnector = cloverGoConnector450Reader
                 
                 cloverGoConnector450Reader?.initializeConnection()
             }

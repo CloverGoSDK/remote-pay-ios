@@ -11,7 +11,7 @@ import clovergoclient
 
 public class CloverGoConnector : NSObject, ICloverGoConnector, CardReaderDelegate {
     
-    var config:CloverGoDeviceConfiguration
+    var config:CloverGoDeviceConfiguration!
     
     let cloverGo = CloverGo.sharedInstance
     
@@ -30,7 +30,7 @@ public class CloverGoConnector : NSObject, ICloverGoConnector, CardReaderDelegat
     var lastChallengeType : ChallengeType?
     
     public init(config:CloverGoDeviceConfiguration) {
-        
+        super.init()
         self.config = config
         
         var env : Env
@@ -45,7 +45,25 @@ public class CloverGoConnector : NSObject, ICloverGoConnector, CardReaderDelegat
         cloverGo.initializeWithAccessToken(config.accessToken, apiKey: config.apiKey, secret: config.secret, env: env)
         cloverGo.allowAutoConnect = config.allowAutoConnect
         cloverGo.overrideDuplicateTransaction = config.allowDuplicateTransaction
+        
+        self.getMerchantInfo()
 
+    }
+    
+    private func getMerchantInfo() {
+        cloverGo.getMerchantInfo({ (merchant) in
+            self.merchantInfo = MerchantInfo(id: merchant.id, mid: nil, name: merchant.name, deviceName: nil, deviceSerialNumber: nil, deviceModel: nil)
+            self.merchantInfo!.supportsAuths = (merchant.features?.contains(MerchantPropertyType.supportsAuths.toString()) ?? false) ? true : false
+            self.merchantInfo!.supportsVaultCards = (merchant.features?.contains(MerchantPropertyType.supportsVaultCards.toString()) ?? false) ? true : false
+            self.merchantInfo!.supportsManualRefunds = (merchant.features?.contains(MerchantPropertyType.supportsManualRefunds.toString()) ?? false) ? true : false
+            self.merchantInfo!.supportsTipAdjust = (merchant.features?.contains(MerchantPropertyType.supportsTipAdjust.toString()) ?? false) ? true : false
+            self.merchantInfo!.supportsPreAuths = (merchant.features?.contains(MerchantPropertyType.supportsPreAuths.toString()) ?? false) ? true : false
+            self.merchantInfo!.supportsVoids = (merchant.features?.contains(MerchantPropertyType.supportsVoids.toString()) ?? false) ? true : false
+            self.merchantInfo!.supportsSales = (merchant.features?.contains(MerchantPropertyType.supportsSales.toString()) ?? false) ? true : false
+            
+        }) { (error) in
+            //Not expecting an error for now
+        }
     }
     
     public func initializeConnection() {
@@ -270,18 +288,22 @@ public class CloverGoConnector : NSObject, ICloverGoConnector, CardReaderDelegat
     public func onReady(cardReaderInfo: ReaderInfo) {
         print("Reader is Ready!")
         deviceReady = true
-        cloverGo.getMerchantInfo({ (merchant) in
-            let merchantInfo = MerchantInfo(id: merchant.id, mid: nil, name: merchant.name, deviceName: cardReaderInfo.bluetoothName, deviceSerialNumber: cardReaderInfo.serialNumber, deviceModel: cardReaderInfo.readerType.toString())
-            merchantInfo.supportsAuths = (merchant.features?.contains(MerchantPropertyType.supportsAuths.toString()) ?? false) ? true : false
-            merchantInfo.supportsVaultCards = (merchant.features?.contains(MerchantPropertyType.supportsVaultCards.toString()) ?? false) ? true : false
-            merchantInfo.supportsManualRefunds = (merchant.features?.contains(MerchantPropertyType.supportsManualRefunds.toString()) ?? false) ? true : false
-            merchantInfo.supportsTipAdjust = (merchant.features?.contains(MerchantPropertyType.supportsTipAdjust.toString()) ?? false) ? true : false
-            merchantInfo.supportsPreAuths = (merchant.features?.contains(MerchantPropertyType.supportsPreAuths.toString()) ?? false) ? true : false
-            merchantInfo.supportsVoids = (merchant.features?.contains(MerchantPropertyType.supportsVoids.toString()) ?? false) ? true : false
-            merchantInfo.supportsSales = (merchant.features?.contains(MerchantPropertyType.supportsSales.toString()) ?? false) ? true : false
-            self.connectorListener?.onDeviceReady(merchantInfo)
-        }) { (error) in
-            //Not expecting an error for now
+        
+        if let mercInfo = self.merchantInfo {
+            let currMerchantInfo = MerchantInfo(id: mercInfo.merchantId, mid: nil, name: mercInfo.merchantName, deviceName: cardReaderInfo.bluetoothName ?? cardReaderInfo.readerName, deviceSerialNumber: cardReaderInfo.serialNumber, deviceModel: cardReaderInfo.readerType.toString())
+            
+            currMerchantInfo.supportsAuths = mercInfo.supportsAuths
+            currMerchantInfo.supportsVaultCards = mercInfo.supportsVaultCards
+            currMerchantInfo.supportsManualRefunds = mercInfo.supportsManualRefunds
+            currMerchantInfo.supportsTipAdjust = mercInfo.supportsTipAdjust
+            currMerchantInfo.supportsPreAuths = mercInfo.supportsPreAuths
+            currMerchantInfo.supportsVoids = mercInfo.supportsVoids
+            currMerchantInfo.supportsSales = mercInfo.supportsSales
+            
+            self.connectorListener?.onDeviceReady(currMerchantInfo)
+        } else {
+            getMerchantInfo()
+            debugPrint("Could not retrieve Merchant properties")
         }
     }
     
@@ -487,7 +509,10 @@ class TransactionDelegateImpl : NSObject, TransactionDelegate {
             payment.cardTransaction?.last4 = transactionResponse.maskedCardNo?.substringFromIndex(transactionResponse.maskedCardNo!.endIndex.advancedBy(-4))
         }
         payment.cardTransaction?.cardholderName = transactionResponse.cardHolderName
-//        payment.cardTransaction?.cvmResult = EnumerationUtil.CvmResult_toEnum(transactionResponse.cvmResult ?? "")
+        
+        payment.cardTransaction?.cvmResult = EnumerationUtil.CvmResult_toEnum(transactionResponse.cvmResult ?? "")
+        
+        payment.result = (payment.cardTransaction?.type_ == .AUTH) ? CLVModels.Payments.Result.AUTH : CLVModels.Payments.Result.SUCCESS
         
         if transactionType == CLVGoTransactionType.purchase {
             let response = SaleResponse(success: true, result: ResultCode.SUCCESS)
